@@ -1,4 +1,3 @@
-
 const API_BASE_URL = 'https://la81umkg80.execute-api.af-south-1.amazonaws.com';
 const API_ENDPOINTS = {
     login: `${API_BASE_URL}/login`,
@@ -7,8 +6,6 @@ const API_ENDPOINTS = {
     confirmRegistration: `${API_BASE_URL}/confirm-registration`,
     resetPasswordConfirm: `${API_BASE_URL}/reset-password-confirm`
 };
-
-
 
 function toggleModal(modalId, show) {
     const modal = document.getElementById(modalId);
@@ -22,7 +19,6 @@ function toggleModal(modalId, show) {
     }
 }
 
-
 function showAlert(containerId, message, type = 'error') {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -30,7 +26,6 @@ function showAlert(containerId, message, type = 'error') {
     const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
     container.innerHTML = message ? `<div class="register-modal-alert ${alertClass}"><i class="fas ${icon}"></i> <span>${message}</span></div>` : '';
 }
-
 
 function setButtonLoading(button, isLoading) {
     if (!button) return;
@@ -44,8 +39,6 @@ function setButtonLoading(button, isLoading) {
     }
 }
 
-
-
 window.togglePassword = function(fieldId) {
     const field = document.getElementById(fieldId);
     const eyeIcon = document.getElementById(`${fieldId}-eye`);
@@ -55,7 +48,6 @@ window.togglePassword = function(fieldId) {
         eyeIcon.className = `fas ${isPassword ? 'fa-eye' : 'fa-eye-slash'}`;
     }
 };
-
 
 function decodeJwt(token) {
     try {
@@ -69,12 +61,10 @@ function decodeJwt(token) {
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
 
     const sidebarLoginContainer = document.getElementById('sidebarLogin');
 
-   
     function updateUserStatusUI() {
         if (!sidebarLoginContainer) return;
 
@@ -101,11 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('signOutBtn').addEventListener('click', () => {
                     sessionStorage.removeItem('accessToken');
                     sessionStorage.removeItem('idToken');
-                    window.location.href = 'index.html'; 
+                    window.location.href = 'index.html';
                 });
             }
         } else {
-           
+
             sidebarLoginContainer.innerHTML = `
                 <button id="sidebarSignInBtn" class="sidebar-btn sidebar-signin-btn">Sign In / Register</button>
             `;
@@ -115,14 +105,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-  
     updateUserStatusUI();
 
-   
     document.querySelectorAll('.login-modal, .register-modal, .forgot-password-modal').forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal && !e.target.closest('.modal-content, .login-modal-container, .register-modal-container, .forgot-password-modal-container')) {
-                 toggleModal(modal.id, false);
+                toggleModal(modal.id, false);
             }
         });
         const closeButton = modal.querySelector('.login-modal-close, .register-modal-close, .forgot-password-modal-close, .wishlist-close-modal');
@@ -136,39 +124,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-  
     const loginModal = document.getElementById('loginModal');
     if (loginModal) {
         const loginForm = document.getElementById('loginModalForm');
         loginForm.addEventListener('submit', async (e) => {
-             e.preventDefault();
-             const email = document.getElementById('loginModalEmail').value;
-             const password = document.getElementById('loginModalPassword').value;
-             const loginBtn = document.getElementById('loginModalBtn');
-             
-             showAlert('loginAlertContainer', '');
-             setButtonLoading(loginBtn, true);
- 
-             try {
-                 const response = await fetch(API_ENDPOINTS.login, {
-                     method: 'POST',
-                     headers: { 'Content-Type': 'application/json' },
-                     body: JSON.stringify({ email, password })
-                 });
-                 const data = await response.json();
- 
-                 if (response.ok) {
-                     sessionStorage.setItem('accessToken', data.accessToken);
-                     sessionStorage.setItem('idToken', data.idToken);
-                     window.location.reload();
-                 } else {
-                     showAlert('loginAlertContainer', data.message || 'An unknown error occurred.', 'error');
-                     setButtonLoading(loginBtn, false);
-                 }
-             } catch (error) {
-                 showAlert('loginAlertContainer', 'Could not connect to the server.', 'error');
-                 setButtonLoading(loginBtn, false);
-             }
+            e.preventDefault();
+            const email = document.getElementById('loginModalEmail').value;
+            const password = document.getElementById('loginModalPassword').value;
+            const loginBtn = document.getElementById('loginModalBtn');
+
+            showAlert('loginAlertContainer', '');
+            setButtonLoading(loginBtn, true);
+
+            try {
+                const response = await fetch(API_ENDPOINTS.login, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    sessionStorage.setItem('accessToken', data.accessToken);
+                    sessionStorage.setItem('idToken', data.idToken);
+                    window.location.reload();
+                } else {
+                    showAlert('loginAlertContainer', data.message || 'An unknown error occurred.', 'error');
+                    setButtonLoading(loginBtn, false);
+                }
+            } catch (error) {
+                showAlert('loginAlertContainer', 'Could not connect to the server.', 'error');
+                setButtonLoading(loginBtn, false);
+            }
         });
 
         document.getElementById('loginModalForgotPassword').addEventListener('click', (e) => {
@@ -183,5 +170,75 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-  
+    // --- NEW: Handle Forgot Password Modal ---
+    const forgotPasswordModal = document.getElementById('forgotPasswordModal');
+    if (forgotPasswordModal) {
+        const forgotPasswordForm = document.getElementById('forgotPasswordModalForm');
+        forgotPasswordForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('forgotPasswordModalEmail').value;
+            const forgotPasswordBtn = document.getElementById('forgotPasswordModalBtn');
+
+            showAlert('forgotPasswordAlertContainer', '');
+            setButtonLoading(forgotPasswordBtn, true);
+
+            try {
+                const response = await fetch(API_ENDPOINTS.forgotPassword, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    // On success, redirect to the reset password page, passing the email as a query parameter
+                    window.location.href = `reset-password.html?email=${encodeURIComponent(email)}`;
+                } else {
+                    showAlert('forgotPasswordAlertContainer', data.message || 'An unknown error occurred.', 'error');
+                    setButtonLoading(forgotPasswordBtn, false);
+                }
+            } catch (error) {
+                showAlert('forgotPasswordAlertContainer', 'Could not connect to the server.', 'error');
+                setButtonLoading(forgotPasswordBtn, false);
+            }
+        });
+    }
+
+    // --- NEW: Handle Register Modal ---
+    const registerModal = document.getElementById('registerModal');
+    if (registerModal) {
+        const registerForm = document.getElementById('registerModalForm');
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('registerModalEmail').value;
+            const given_name = document.getElementById('registerModalFirstName').value;
+            const family_name = document.getElementById('registerModalLastName').value;
+            const password = document.getElementById('registerModalPassword').value;
+            const registerBtn = document.getElementById('registerModalBtn');
+
+            showAlert('registerAlertContainer', '');
+            setButtonLoading(registerBtn, true);
+
+            try {
+                const response = await fetch(API_ENDPOINTS.register, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password, given_name, family_name })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // On success, redirect to the confirmation page, passing the email
+                    window.location.href = `confirm-registration.html?email=${encodeURIComponent(email)}`;
+                } else {
+                    showAlert('registerAlertContainer', data.message || 'An unknown error occurred.', 'error');
+                    setButtonLoading(registerBtn, false);
+                }
+            } catch (error) {
+                showAlert('registerAlertContainer', 'Could not connect to the server.', 'error');
+                setButtonLoading(registerBtn, false);
+            }
+        });
+    }
 });
