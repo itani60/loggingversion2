@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         } else {
-
+            // --- User is LOGGED OUT ---
             sidebarLoginContainer.innerHTML = `
                 <button id="sidebarSignInBtn" class="sidebar-btn sidebar-signin-btn">Sign In / Register</button>
             `;
@@ -124,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- Handle Login Modal ---
     const loginModal = document.getElementById('loginModal');
     if (loginModal) {
         const loginForm = document.getElementById('loginModalForm');
@@ -170,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- NEW: Handle Forgot Password Modal ---
+    // --- Handle Forgot Password Modal ---
     const forgotPasswordModal = document.getElementById('forgotPasswordModal');
     if (forgotPasswordModal) {
         const forgotPasswordForm = document.getElementById('forgotPasswordModalForm');
@@ -191,7 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
 
                 if (response.ok) {
-                    // On success, redirect to the reset password page, passing the email as a query parameter
                     window.location.href = `reset-password.html?email=${encodeURIComponent(email)}`;
                 } else {
                     showAlert('forgotPasswordAlertContainer', data.message || 'An unknown error occurred.', 'error');
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- NEW: Handle Register Modal ---
+    // --- Handle Register Modal ---
     const registerModal = document.getElementById('registerModal');
     if (registerModal) {
         const registerForm = document.getElementById('registerModalForm');
@@ -229,7 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
 
                 if (response.ok) {
-                    // On success, redirect to the confirmation page, passing the email
                     window.location.href = `confirm-registration.html?email=${encodeURIComponent(email)}`;
                 } else {
                     showAlert('registerAlertContainer', data.message || 'An unknown error occurred.', 'error');
