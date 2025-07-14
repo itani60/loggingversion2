@@ -2187,6 +2187,134 @@
                 font-size: 1.3rem;
             }
         }
+
+        /* Cookie Banner Styles */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+            z-index: 9999;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-top: 3px solid #f80101;
+        }
+
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+
+        .cookie-banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .cookie-banner-text {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .cookie-banner-text i {
+            font-size: 1.5rem;
+            color: #f39c12;
+            flex-shrink: 0;
+        }
+
+        .cookie-banner-actions {
+            display: flex;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+
+        .cookie-banner-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 80px;
+        }
+
+        .cookie-banner-btn.accept-btn {
+            background: linear-gradient(135deg, #f80101 0%, #d80000 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(248, 1, 1, 0.3);
+        }
+
+        .cookie-banner-btn.accept-btn:hover {
+            background: linear-gradient(135deg, #d80000 0%, #b30000 100%);
+            box-shadow: 0 4px 12px rgba(248, 1, 1, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .cookie-banner-btn.decline-btn {
+            background: transparent;
+            color: #bdc3c7;
+            border: 1px solid #5a6c7d;
+        }
+
+        .cookie-banner-btn.decline-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: #7f8c8d;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .cookie-banner {
+                padding: 16px;
+            }
+
+            .cookie-banner-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+            }
+
+            .cookie-banner-text {
+                font-size: 0.9rem;
+                justify-content: center;
+            }
+
+            .cookie-banner-actions {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .cookie-banner-btn {
+                flex: 1;
+                max-width: 120px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cookie-banner-text {
+                font-size: 0.85rem;
+            }
+
+            .cookie-banner-text i {
+                font-size: 1.2rem;
+            }
+
+            .cookie-banner-btn {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2358,12 +2486,6 @@
                     </li>
                 </ul>
             </div>
-            <div class="sidebar-footer">
-                <div class="cookie-notice">
-                    <p>This website uses cookies to provide you with the best experience.</p>
-                    <button class="accept-cookies" onclick="acceptCookies()">Accept</button>
-                </div>
-            </div>
         </nav>
         <main class="content">
             <section class="hero-carousel">
@@ -2517,6 +2639,20 @@
             <p>&copy; 2025 CompareHub Prices. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-banner-content">
+            <div class="cookie-banner-text">
+                <i class="fas fa-cookie-bite"></i>
+                <span>This website uses cookies to provide you with the best experience. By continuing to use this site, you agree to our use of cookies.</span>
+            </div>
+            <div class="cookie-banner-actions">
+                <button class="cookie-banner-btn accept-btn" onclick="acceptCookies()">Accept</button>
+                <button class="cookie-banner-btn decline-btn" onclick="declineCookies()">Decline</button>
+            </div>
+        </div>
+    </div>
 
 <script>
 // index.js
@@ -3101,10 +3237,44 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     });
 
+    // Cookie Banner Functions
     window.acceptCookies = function() {
-        const cookieNotice = document.querySelector('.cookie-notice');
-        if (cookieNotice) cookieNotice.style.display = 'none';
+        const cookieBanner = document.getElementById('cookieBanner');
+        if (cookieBanner) {
+            cookieBanner.classList.remove('show');
+            localStorage.setItem('cookiesAccepted', 'true');
+            setTimeout(() => {
+                cookieBanner.style.display = 'none';
+            }, 400);
+        }
     };
+
+    window.declineCookies = function() {
+        const cookieBanner = document.getElementById('cookieBanner');
+        if (cookieBanner) {
+            cookieBanner.classList.remove('show');
+            localStorage.setItem('cookiesAccepted', 'false');
+            setTimeout(() => {
+                cookieBanner.style.display = 'none';
+            }, 400);
+        }
+    };
+
+    // Show cookie banner on page load if not already accepted/declined
+    function showCookieBanner() {
+        const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+        if (cookiesAccepted === null) {
+            const cookieBanner = document.getElementById('cookieBanner');
+            if (cookieBanner) {
+                setTimeout(() => {
+                    cookieBanner.classList.add('show');
+                }, 1000); // Show after 1 second delay
+            }
+        }
+    }
+
+    // Initialize cookie banner
+    showCookieBanner();
 
     window.subscribeNewsletter = function(event) {
         event.preventDefault();
