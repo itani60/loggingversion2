@@ -765,7 +765,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 verificationForm.style.display = 'none'; // Hide form on success
                 resendLink.style.display = 'none'; // Hide resend link
                 setTimeout(() => {
-                    window.location.href = 'login.html'; // Redirect to login page
+                    window.location.href = 'index.html'; // Redirect to login page
                 }, 3000);
             } else {
                 showMessage(errorMessageEl, data.message || "An error occurred.");
