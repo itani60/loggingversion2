@@ -1822,13 +1822,13 @@
         <div class="profile-sidebar">
             <div class="profile-avatar">
                 <div class="avatar-image">
-                    <span id="avatarInitials">JD</span>
+                    <span id="avatarInitials">U</span>
                     <button class="avatar-upload" title="Upload new photo">
                         <i class="fas fa-camera"></i>
                     </button>
                 </div>
-                <h2 id="profileName" class="profile-name">John Doe</h2>
-                <p id="profileEmail" class="profile-email">john.doe@example.com</p>
+                <h2 id="profileName" class="profile-name">Loading...</h2>
+                <p id="profileEmail" class="profile-email">Loading...</p>
                 <p class="profile-member-since">Member since July 2023</p>
             </div>
             <ul class="profile-nav">
@@ -1863,16 +1863,16 @@
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="first-name">First Name</label>
-                                <input type="text" id="first-name" name="first-name" value="John">
+                                <input type="text" id="first-name" name="first-name" value="">
                             </div>
                             <div class="form-group">
                                 <label for="last-name">Last Name</label>
-                                <input type="text" id="last-name" name="last-name" value="Doe">
+                                <input type="text" id="last-name" name="last-name" value="">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" value="john.doe@example.com">
+                            <input type="email" id="email" name="email" value="">
                         </div>
                         <button type="submit" class="btn">Save Changes</button>
                     </form>
@@ -2024,51 +2024,7 @@
                     </div>
                     
                     <div id="notifications-list">
-                        <div class="notification-item">
-                            <div class="notification-icon">
-                                <i class="fas fa-tag"></i>
-                            </div>
-                            <div class="notification-content">
-                                <div class="notification-title">Price Drop Alert</div>
-                                <div class="notification-message">
-                                    <strong>Samsung Galaxy S25 Ultra</strong> is now <span class="price-drop">R2,000 cheaper</span> than your last view.
-                                </div>
-                                <div class="notification-time">2 hours ago</div>
-                            </div>
-                            <button class="notification-dismiss" title="Dismiss notification">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div class="notification-item">
-                            <div class="notification-icon">
-                                <i class="fas fa-bell"></i>
-                            </div>
-                            <div class="notification-content">
-                                <div class="notification-title">New Deal Available</div>
-                                <div class="notification-message">
-                                    Special weekend deal on <strong>iPhone 16 Pro Max</strong> - <span class="discount">15% off</span> at iStore.
-                                </div>
-                                <div class="notification-time">Yesterday</div>
-                            </div>
-                            <button class="notification-dismiss" title="Dismiss notification">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                        <div class="notification-item">
-                            <div class="notification-icon">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <div class="notification-content">
-                                <div class="notification-title">Wishlist Update</div>
-                                <div class="notification-message">
-                                    <strong>Google Pixel 9 Pro</strong> is back in stock at <span class="highlight">3 stores</span>.
-                                </div>
-                                <div class="notification-time">3 days ago</div>
-                            </div>
-                            <button class="notification-dismiss" title="Dismiss notification">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
+                        <!-- Notifications will be dynamically loaded here -->
                     </div>
                     
                     <div id="empty-notifications" style="display: none;">
@@ -2173,7 +2129,6 @@
             <p>&copy; 2025 CompareHub Prices. All rights reserved.</p>
         </div>
     </footer>
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
