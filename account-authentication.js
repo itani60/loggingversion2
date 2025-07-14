@@ -24,7 +24,14 @@ function showAlert(containerId, message, type = 'error') {
     if (!container) return;
     const alertClass = type === 'success' ? 'success' : 'error';
     const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
-    container.innerHTML = message ? `<div class="register-modal-alert ${alertClass}"><i class="fas ${icon}"></i> <span>${message}</span></div>` : '';
+    
+    if (message) {
+        container.innerHTML = `<div class="register-modal-alert ${alertClass}"><i class="fas ${icon}"></i> <span>${message}</span></div>`;
+        container.style.display = 'block';
+    } else {
+        container.innerHTML = '';
+        container.style.display = 'none';
+    }
 }
 
 function setButtonLoading(button, isLoading) {
@@ -46,6 +53,16 @@ window.togglePassword = function(fieldId) {
         const isPassword = field.type === 'password';
         field.type = isPassword ? 'text' : 'password';
         eyeIcon.className = `fas ${isPassword ? 'fa-eye' : 'fa-eye-slash'}`;
+    }
+};
+
+window.toggleRegisterPassword = function(fieldId) {
+    const field = document.getElementById(fieldId);
+    const eyeIcon = document.getElementById(`${fieldId}-eye`);
+    if (field && eyeIcon) {
+        const isPassword = field.type === 'password';
+        field.type = isPassword ? 'text' : 'password';
+        eyeIcon.className = `fas ${isPassword ? 'fa-eye-slash' : 'fa-eye'}`;
     }
 };
 
@@ -169,18 +186,32 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleModal('loginModal', false);
             toggleModal('registerModal', true);
         });
+
+        // Password toggle for login modal
+        const loginPasswordToggle = document.getElementById('loginModalPasswordToggle');
+        if (loginPasswordToggle) {
+            loginPasswordToggle.addEventListener('click', () => {
+                const passwordField = document.getElementById('loginModalPassword');
+                const eyeIcon = loginPasswordToggle.querySelector('i');
+                if (passwordField && eyeIcon) {
+                    const isPassword = passwordField.type === 'password';
+                    passwordField.type = isPassword ? 'text' : 'password';
+                    eyeIcon.className = `fas ${isPassword ? 'fa-eye-slash' : 'fa-eye'}`;
+                }
+            });
+        }
     }
 
     // --- Handle Forgot Password Modal ---
     const forgotPasswordModal = document.getElementById('forgotPasswordModal');
     if (forgotPasswordModal) {
-        const forgotPasswordForm = document.getElementById('forgotPasswordModalForm');
+        const forgotPasswordForm = document.getElementById('forgotPasswordForm');
         forgotPasswordForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('forgotPasswordModalEmail').value;
-            const forgotPasswordBtn = document.getElementById('forgotPasswordModalBtn');
+            const email = document.getElementById('forgotPasswordEmail').value;
+            const forgotPasswordBtn = document.getElementById('forgotPasswordBtn');
 
-            showAlert('forgotPasswordAlertContainer', '');
+            showAlert('forgotPasswordAlert', '');
             setButtonLoading(forgotPasswordBtn, true);
 
             try {
@@ -194,11 +225,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     window.location.href = `reset-password.html?email=${encodeURIComponent(email)}`;
                 } else {
-                    showAlert('forgotPasswordAlertContainer', data.message || 'An unknown error occurred.', 'error');
+                    showAlert('forgotPasswordAlert', data.message || 'An unknown error occurred.', 'error');
                     setButtonLoading(forgotPasswordBtn, false);
                 }
             } catch (error) {
-                showAlert('forgotPasswordAlertContainer', 'Could not connect to the server.', 'error');
+                showAlert('forgotPasswordAlert', 'Could not connect to the server.', 'error');
                 setButtonLoading(forgotPasswordBtn, false);
             }
         });
@@ -207,13 +238,53 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Handle Register Modal ---
     const registerModal = document.getElementById('registerModal');
     if (registerModal) {
+        // Password strength validation
+        const registerPassword = document.getElementById('registerPassword');
+        if (registerPassword) {
+            registerPassword.addEventListener('input', function() {
+                const password = this.value;
+                const lengthCheck = document.getElementById('register-length-check');
+                const upperCheck = document.getElementById('register-upper-check');
+                const numberCheck = document.getElementById('register-number-check');
+                const specialCheck = document.getElementById('register-special-check');
+
+                // Length check
+                if (lengthCheck) {
+                    const isValid = password.length >= 8;
+                    lengthCheck.classList.toggle('valid', isValid);
+                    lengthCheck.querySelector('i').className = `fas ${isValid ? 'fa-check' : 'fa-times'}`;
+                }
+
+                // Uppercase check
+                if (upperCheck) {
+                    const isValid = /[A-Z]/.test(password);
+                    upperCheck.classList.toggle('valid', isValid);
+                    upperCheck.querySelector('i').className = `fas ${isValid ? 'fa-check' : 'fa-times'}`;
+                }
+
+                // Number check
+                if (numberCheck) {
+                    const isValid = /[0-9]/.test(password);
+                    numberCheck.classList.toggle('valid', isValid);
+                    numberCheck.querySelector('i').className = `fas ${isValid ? 'fa-check' : 'fa-times'}`;
+                }
+
+                // Special character check
+                if (specialCheck) {
+                    const isValid = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+                    specialCheck.classList.toggle('valid', isValid);
+                    specialCheck.querySelector('i').className = `fas ${isValid ? 'fa-check' : 'fa-times'}`;
+                }
+            });
+        }
+
         const registerForm = document.getElementById('registerModalForm');
         registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('registerModalEmail').value;
-            const given_name = document.getElementById('registerModalFirstName').value;
-            const family_name = document.getElementById('registerModalLastName').value;
-            const password = document.getElementById('registerModalPassword').value;
+            const email = document.getElementById('registerEmail').value;
+            const given_name = document.getElementById('registerFirstname').value;
+            const family_name = document.getElementById('registerLastname').value;
+            const password = document.getElementById('registerPassword').value;
             const registerBtn = document.getElementById('registerModalBtn');
 
             showAlert('registerAlertContainer', '');
@@ -239,5 +310,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 setButtonLoading(registerBtn, false);
             }
         });
+
+        // Register modal navigation links
+        const registerModalLoginLink = document.getElementById('registerModalLoginLink');
+        if (registerModalLoginLink) {
+            registerModalLoginLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleModal('registerModal', false);
+                toggleModal('loginModal', true);
+            });
+        }
     }
 });
