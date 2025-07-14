@@ -2174,558 +2174,389 @@
         </div>
     </footer>
 
-    <script>
-        // Profile Navigation and Section Management
-        function showSection(sectionId) {
-            console.log('Switching to section:', sectionId); // Debug log
-            
-            // Hide all sections
-            const sections = document.querySelectorAll('.profile-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-                section.style.display = 'none'; // Ensure hidden
-            });
-            
-            // Show selected section
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-                targetSection.style.display = 'block'; // Ensure visible
-                console.log('Section found and activated:', sectionId);
-            } else {
-                console.error('Section not found:', sectionId);
-            }
-            
-            // Update navigation active state
-            const navLinks = document.querySelectorAll('.profile-nav a');
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            const activeLink = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
-            if (activeLink) {
-                activeLink.classList.add('active');
-                console.log('Navigation link activated');
-            }
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // =========================================================================
+    // CONFIGURATION & API ENDPOINTS
+    // =========================================================================
+    const API = {
+        getUser: 'https://la81umkg80.execute-api.af-south-1.amazonaws.com/user',
+        updateUser: 'https://la81umkg80.execute-api.af-south-1.amazonaws.com/user',
+        changePassword: 'https://la81umkg80.execute-api.af-south-1.amazonaws.com/change-password',
+        logout: 'https://la81umkg80.execute-api.af-south-1.amazonaws.com/logout'
+    };
+
+    // =========================================================================
+    // ELEMENT SELECTORS
+    // =========================================================================
+    const avatarInitialsEl = document.getElementById('avatarInitials');
+    const profileNameEl = document.getElementById('profileName');
+    const profileEmailEl = document.getElementById('profileEmail');
+    const memberSinceEl = document.getElementById('memberSince');
+    const profileForm = document.getElementById('profile-form');
+    const privacyForm = document.getElementById('privacy-form');
+    const logoutBtn = document.getElementById('logoutBtn');
+    
+    // =========================================================================
+    // NOTIFICATION SYSTEM (FOR POP-UPS)
+    // =========================================================================
+    function showNotification(message, type = 'success', title = '') {
+        const container = document.getElementById('notificationContainer');
+        if (!container) {
+            console.error('Notification container not found!');
+            return;
         }
 
-        // Alternative navigation function using event listeners instead of onclick
-        function setupNavigation() {
-            const navLinks = document.querySelectorAll('.profile-nav a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const href = this.getAttribute('href');
-                    if (href && href.startsWith('#')) {
-                        const sectionId = href.substring(1);
-                        showSection(sectionId);
-                    }
-                });
-            });
-        }
+        const notification = document.createElement('div');
+        notification.className = `notification ${type} show`;
+        
+        let iconClass = 'fa-check-circle';
+        if (type === 'error') iconClass = 'fa-exclamation-circle';
+        if (type === 'info') iconClass = 'fa-info-circle';
+        if (type === 'warning') iconClass = 'fa-exclamation-triangle';
 
-        // Wishlist Management
-        class WishlistManager {
-            constructor() {
-                this.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-                this.init();
-            }
+        notification.innerHTML = `
+            <div class="notification-content">
+                <div class="notification-icon"><i class="fas ${iconClass}"></i></div>
+                <div class="notification-message">
+                    ${title ? `<div class="notification-title">${title}</div>` : ''}
+                    <div class="notification-text">${message}</div>
+                </div>
+                <button class="notification-close">&times;</button>
+            </div>
+            <div class="notification-progress"><div class="notification-progress-bar"></div></div>
+        `;
 
-            init() {
-                this.renderWishlist();
-                this.setupEventListeners();
-            }
+        container.appendChild(notification);
 
-            setupEventListeners() {
-                // Wishlist search functionality
-                const searchInput = document.querySelector('.wishlist-search-input');
-                const clearSearchBtn = document.querySelector('.clear-search-btn');
-                
-                if (searchInput) {
-                    searchInput.addEventListener('input', (e) => {
-                        this.searchWishlist(e.target.value);
-                    });
-                }
-                
-                if (clearSearchBtn) {
-                    clearSearchBtn.addEventListener('click', () => {
-                        searchInput.value = '';
-                        this.renderWishlist();
-                    });
-                }
+        setTimeout(() => notification.remove(), 5000);
+        notification.querySelector('.notification-close').addEventListener('click', () => notification.remove());
+    }
 
-                // Wishlist modal functionality
-                const wishlistLink = document.getElementById('wishlist-link');
-                const wishlistModal = document.getElementById('wishlist-modal');
-                const closeModal = document.querySelector('.wishlist-close-modal');
-                const removeAllBtn = document.querySelector('.remove-all-btn');
-
-                if (wishlistLink) {
-                    wishlistLink.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        this.openWishlistModal();
-                    });
-                }
-
-                if (closeModal) {
-                    closeModal.addEventListener('click', () => {
-                        this.closeWishlistModal();
-                    });
-                }
-
-                if (removeAllBtn) {
-                    removeAllBtn.addEventListener('click', () => {
-                        this.clearWishlist();
-                    });
-                }
-
-                // Close modal when clicking outside
-                if (wishlistModal) {
-                    wishlistModal.addEventListener('click', (e) => {
-                        if (e.target === wishlistModal) {
-                            this.closeWishlistModal();
-                        }
-                    });
-                }
-            }
-
-            addToWishlist(product) {
-                const existingItem = this.wishlist.find(item => item.id === product.id);
-                if (!existingItem) {
-                    this.wishlist.push(product);
-                    this.saveWishlist();
-                    this.renderWishlist();
-                    this.showNotification('Product added to wishlist!', 'success');
-                }
-            }
-
-            removeFromWishlist(productId) {
-                this.wishlist = this.wishlist.filter(item => item.id !== productId);
-                this.saveWishlist();
-                this.renderWishlist();
-                this.showNotification('Product removed from wishlist', 'info');
-            }
-
-            clearWishlist() {
-                if (confirm('Are you sure you want to remove all items from your wishlist?')) {
-                    this.wishlist = [];
-                    this.saveWishlist();
-                    this.renderWishlist();
-                    this.showNotification('Wishlist cleared', 'info');
-                }
-            }
-
-            searchWishlist(query) {
-                const filteredItems = this.wishlist.filter(item =>
-                    item.name.toLowerCase().includes(query.toLowerCase())
-                );
-                this.renderWishlist(filteredItems);
-            }
-
-            renderWishlist(items = this.wishlist) {
-                const wishlistGrid = document.querySelector('#my-wishlist .wishlist-grid');
-                const modalWishlistGrid = document.getElementById('wishlist-items');
-                
-                if (items.length === 0) {
-                    const emptyState = `
-                        <div class="empty-wishlist">
-                            <i class="fas fa-heart-broken"></i>
-                            <p>Your wishlist is empty</p>
-                            <div class="empty-wishlist-subtext">
-                                Start adding products to your wishlist to keep track of items you're interested in.
-                            </div>
-                        </div>
-                    `;
-                    
-                    if (wishlistGrid) wishlistGrid.innerHTML = emptyState;
-                    if (modalWishlistGrid) {
-                        modalWishlistGrid.innerHTML = '';
-                        document.getElementById('modal-empty-wishlist').style.display = 'block';
-                    }
-                } else {
-                    const wishlistHTML = items.map(item => `
-                        <div class="wishlist-item">
-                            <div class="wishlist-item-image">
-                                <img src="${item.image}" alt="${item.name}">
-                            </div>
-                            <div class="wishlist-item-details">
-                                <div class="wishlist-item-title">${item.name}</div>
-                                <div class="wishlist-item-price">R${item.price}</div>
-                                <div class="wishlist-item-actions">
-                                    <a href="${item.url}" class="wishlist-view-btn">View Product</a>
-                                    <button class="wishlist-remove-btn" onclick="wishlistManager.removeFromWishlist('${item.id}')">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('');
-                    
-                    if (wishlistGrid) wishlistGrid.innerHTML = wishlistHTML;
-                    if (modalWishlistGrid) {
-                        modalWishlistGrid.innerHTML = wishlistHTML;
-                        document.getElementById('modal-empty-wishlist').style.display = 'none';
-                    }
-                }
-                
-                // Update stats
-                this.updateWishlistStats();
-            }
-
-            updateWishlistStats() {
-                const statValue = document.querySelector('.stat-card .stat-value');
-                if (statValue) {
-                    statValue.textContent = this.wishlist.length;
-                }
-            }
-
-            openWishlistModal() {
-                const modal = document.getElementById('wishlist-modal');
-                if (modal) {
-                    modal.style.display = 'block';
-                    setTimeout(() => modal.classList.add('visible'), 10);
-                    this.renderWishlist();
-                }
-            }
-
-            closeWishlistModal() {
-                const modal = document.getElementById('wishlist-modal');
-                if (modal) {
-                    modal.classList.remove('visible');
-                    setTimeout(() => modal.style.display = 'none', 300);
-                }
-            }
-
-            saveWishlist() {
-                localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
-            }
-
-            showNotification(message, type = 'info') {
-                const notification = document.createElement('div');
-                notification.className = `notification ${type} show`;
-                notification.innerHTML = `
-                    <div class="notification-content">
-                        <div class="notification-icon">
-                            <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation-triangle' : 'info-circle'}"></i>
-                        </div>
-                        <div class="notification-message">
-                            <div class="notification-text">${message}</div>
-                        </div>
-                        <button class="notification-close">&times;</button>
-                    </div>
-                    <div class="notification-progress">
-                        <div class="notification-progress-bar"></div>
-                    </div>
-                `;
-
-                const container = document.querySelector('.notification-container');
-                if (container) {
-                    container.appendChild(notification);
-
-                    // Auto remove after 5 seconds
-                    setTimeout(() => {
-                        notification.remove();
-                    }, 5000);
-
-                    // Manual close
-                    notification.querySelector('.notification-close').addEventListener('click', () => {
-                        notification.remove();
-                    });
-                }
-            }
-        }
-
-        // Account Settings Management
-        class AccountSettingsManager {
-            constructor() {
-                this.init();
-            }
-
-            init() {
-                this.setupEventListeners();
-            }
-
-            setupEventListeners() {
-                // Password toggle functionality
-                const toggleButtons = document.querySelectorAll('.toggle-password');
-                toggleButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        const targetId = button.getAttribute('data-target');
-                        const targetInput = document.getElementById(targetId);
-                        
-                        if (targetInput.type === 'password') {
-                            targetInput.type = 'text';
-                            button.classList.remove('fa-eye');
-                            button.classList.add('fa-eye-slash');
-                        } else {
-                            targetInput.type = 'password';
-                            button.classList.remove('fa-eye-slash');
-                            button.classList.add('fa-eye');
-                        }
-                    });
-                });
-
-                // Privacy form submission
-                const privacyForm = document.getElementById('privacy-form');
-                if (privacyForm) {
-                    privacyForm.addEventListener('submit', (e) => {
-                        e.preventDefault();
-                        this.updateAccountSettings();
-                    });
-                }
-
-                // Delete account functionality
-                const confirmDeleteCheckbox = document.getElementById('confirm-delete');
-                const deleteAccountBtn = document.getElementById('delete-account-btn');
-
-                if (confirmDeleteCheckbox && deleteAccountBtn) {
-                    confirmDeleteCheckbox.addEventListener('change', () => {
-                        if (confirmDeleteCheckbox.checked) {
-                            deleteAccountBtn.classList.add('active');
-                        } else {
-                            deleteAccountBtn.classList.remove('active');
-                        }
-                    });
-
-                    deleteAccountBtn.addEventListener('click', () => {
-                        if (confirmDeleteCheckbox.checked) {
-                            this.deleteAccount();
-                        }
-                    });
-                }
-
-                // Profile form submission
-                const profileForm = document.getElementById('profile-form');
-                if (profileForm) {
-                    profileForm.addEventListener('submit', (e) => {
-                        e.preventDefault();
-                        this.updateProfile();
-                    });
-                }
-
-                // Logout functionality
-                const logoutBtn = document.getElementById('logoutBtn');
-                if (logoutBtn) {
-                    logoutBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        this.logout();
-                    });
-                }
-            }
-
-            updateProfile() {
-                const firstName = document.getElementById('first-name').value;
-                const lastName = document.getElementById('last-name').value;
-                const email = document.getElementById('email').value;
-
-                // Simulate profile update
-                setTimeout(() => {
-                    // Update profile display
-                    document.getElementById('profileName').textContent = `${firstName} ${lastName}`;
-                    document.getElementById('profileEmail').textContent = email;
-                    document.getElementById('avatarInitials').textContent = `${firstName.charAt(0)}${lastName.charAt(0)}`;
-                    
-                    wishlistManager.showNotification('Profile updated successfully!', 'success');
-                }, 500);
-            }
-
-            updateAccountSettings() {
-                const currentPassword = document.getElementById('currentPassword').value;
-                const newPassword = document.getElementById('newPassword').value;
-                const confirmPassword = document.getElementById('confirmPassword').value;
-
-                // Basic validation
-                if (newPassword && newPassword !== confirmPassword) {
-                    wishlistManager.showNotification('New passwords do not match!', 'error');
-                    return;
-                }
-
-                if (newPassword && newPassword.length < 8) {
-                    wishlistManager.showNotification('Password must be at least 8 characters long!', 'error');
-                    return;
-                }
-
-                // Simulate settings update
-                setTimeout(() => {
-                    // Clear password fields
-                    document.getElementById('currentPassword').value = '';
-                    document.getElementById('newPassword').value = '';
-                    document.getElementById('confirmPassword').value = '';
-                    
-                    wishlistManager.showNotification('Account settings updated successfully!', 'success');
-                }, 500);
-            }
-
-            deleteAccount() {
-                const confirmMessage = 'Are you absolutely sure you want to delete your account? This action cannot be undone and will permanently remove all your data.';
-                
-                if (confirm(confirmMessage)) {
-                    // Simulate account deletion
-                    setTimeout(() => {
-                        alert('Account deletion initiated. You will be redirected to the homepage.');
-                        window.location.href = 'index.html';
-                    }, 1000);
-                }
-            }
-
-            logout() {
-                if (confirm('Are you sure you want to logout?')) {
-                    // Clear any stored user data
-                    localStorage.removeItem('userSession');
-                    
-                    // Redirect to homepage
-                    window.location.href = 'index.html';
-                }
-            }
-        }
-
-        // Notifications Management
-        class NotificationsManager {
-            constructor() {
-                this.notifications = this.loadNotifications();
-                this.init();
-            }
-
-            init() {
-                this.renderNotifications();
-                this.setupEventListeners();
-            }
-
-            setupEventListeners() {
-                // Clear all notifications
-                const clearAllBtn = document.getElementById('clear-all-notifications');
-                if (clearAllBtn) {
-                    clearAllBtn.addEventListener('click', () => {
-                        this.clearAllNotifications();
-                    });
-                }
-
-                // Individual notification dismiss buttons
-                this.setupDismissButtons();
-            }
-
-            setupDismissButtons() {
-                const dismissButtons = document.querySelectorAll('.notification-dismiss');
-                dismissButtons.forEach((button, index) => {
-                    button.addEventListener('click', () => {
-                        this.dismissNotification(index);
-                    });
-                });
-            }
-
-            loadNotifications() {
-                // Default notifications - in a real app, these would come from a server
-                return [
-                    {
-                        id: 1,
-                        type: 'price-drop',
-                        icon: 'fas fa-tag',
-                        title: 'Price Drop Alert',
-                        message: '<strong>Samsung Galaxy S25 Ultra</strong> is now <span class="price-drop">R2,000 cheaper</span> than your last view.',
-                        time: '2 hours ago'
-                    },
-                    {
-                        id: 2,
-                        type: 'deal',
-                        icon: 'fas fa-bell',
-                        title: 'New Deal Available',
-                        message: 'Special weekend deal on <strong>iPhone 16 Pro Max</strong> - <span class="discount">15% off</span> at iStore.',
-                        time: 'Yesterday'
-                    },
-                    {
-                        id: 3,
-                        type: 'wishlist',
-                        icon: 'fas fa-heart',
-                        title: 'Wishlist Update',
-                        message: '<strong>Google Pixel 9 Pro</strong> is back in stock at <span class="highlight">3 stores</span>.',
-                        time: '3 days ago'
-                    }
-                ];
-            }
-
-            renderNotifications() {
-                const notificationsList = document.getElementById('notifications-list');
-                const emptyNotifications = document.getElementById('empty-notifications');
-
-                if (this.notifications.length === 0) {
-                    notificationsList.style.display = 'none';
-                    emptyNotifications.style.display = 'block';
-                } else {
-                    notificationsList.style.display = 'block';
-                    emptyNotifications.style.display = 'none';
-
-                    const notificationsHTML = this.notifications.map((notification, index) => `
-                        <div class="notification-item">
-                            <div class="notification-icon">
-                                <i class="${notification.icon}"></i>
-                            </div>
-                            <div class="notification-content">
-                                <div class="notification-title">${notification.title}</div>
-                                <div class="notification-message">${notification.message}</div>
-                                <div class="notification-time">${notification.time}</div>
-                            </div>
-                            <button class="notification-dismiss" title="Dismiss notification" data-index="${index}">
-                                <i class="fas fa-times"></i>
-                            </button>
-                        </div>
-                    `).join('');
-
-                    notificationsList.innerHTML = notificationsHTML;
-                    this.setupDismissButtons();
-                }
-            }
-
-            dismissNotification(index) {
-                this.notifications.splice(index, 1);
-                this.renderNotifications();
-                wishlistManager.showNotification('Notification dismissed', 'info');
-            }
-
-            clearAllNotifications() {
-                if (confirm('Are you sure you want to clear all notifications?')) {
-                    this.notifications = [];
-                    this.renderNotifications();
-                    wishlistManager.showNotification('All notifications cleared', 'info');
-                }
-            }
-        }
-
-        // Initialize all managers when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOM Content Loaded - Initializing profile page');
-            
-            // Setup navigation first
-            setupNavigation();
-            
-            // Initialize managers
-            try {
-                window.wishlistManager = new WishlistManager();
-                console.log('WishlistManager initialized');
-                
-                window.accountSettingsManager = new AccountSettingsManager();
-                console.log('AccountSettingsManager initialized');
-                
-                window.notificationsManager = new NotificationsManager();
-                console.log('NotificationsManager initialized');
-            } catch (error) {
-                console.error('Error initializing managers:', error);
-            }
-
-            // Set default active section
-            setTimeout(() => {
-                showSection('personal-info');
-            }, 100);
-            
-            console.log('Profile page initialization complete');
+    // =========================================================================
+    // PROFILE NAVIGATION
+    // =========================================================================
+    window.showSection = (sectionId) => {
+        document.querySelectorAll('.profile-section').forEach(section => {
+            section.classList.remove('active');
+            section.style.display = 'none';
         });
 
-        // Global functions for inline event handlers
-        window.showSection = showSection;
-        
-        // Ensure functions are available immediately
-        if (typeof window.showSection === 'undefined') {
-            window.showSection = showSection;
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.add('active');
+            targetSection.style.display = 'block';
         }
-    </script>
+
+        document.querySelectorAll('.profile-nav a').forEach(link => link.classList.remove('active'));
+        const activeLink = document.querySelector(`.profile-nav a[href="#${sectionId}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    };
+
+    // =========================================================================
+    // WISHLIST MANAGER CLASS
+    // =========================================================================
+    class WishlistManager {
+        constructor() {
+            this.wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            this.wishlistGrid = document.querySelector('#my-wishlist .wishlist-grid');
+            this.modalWishlistGrid = document.getElementById('wishlist-items');
+            this.wishlistStat = document.querySelector('.stats-grid .stat-card:first-child .stat-value');
+            this.init();
+        }
+
+        init() {
+            this.renderWishlist();
+            this.setupEventListeners();
+        }
+
+        setupEventListeners() {
+            document.querySelector('.wishlist-search-input')?.addEventListener('input', (e) => this.searchWishlist(e.target.value));
+            document.querySelector('.clear-search-btn')?.addEventListener('click', () => {
+                document.querySelector('.wishlist-search-input').value = '';
+                this.renderWishlist();
+            });
+            document.getElementById('wishlist-link')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.openWishlistModal();
+            });
+            document.querySelector('.wishlist-close-modal')?.addEventListener('click', () => this.closeWishlistModal());
+            document.querySelector('.remove-all-btn')?.addEventListener('click', () => this.clearWishlist());
+            document.getElementById('wishlist-modal')?.addEventListener('click', (e) => {
+                if (e.target === document.getElementById('wishlist-modal')) this.closeWishlistModal();
+            });
+        }
+
+        saveWishlist() {
+            localStorage.setItem('wishlist', JSON.stringify(this.wishlist));
+            this.renderWishlist();
+        }
+
+        addToWishlist(product) {
+            if (!this.wishlist.find(item => item.id === product.id)) {
+                this.wishlist.push(product);
+                this.saveWishlist();
+                showNotification('Product added to wishlist!', 'success');
+            }
+        }
+        
+        removeFromWishlist(productId) {
+            this.wishlist = this.wishlist.filter(item => item.id !== productId);
+            this.saveWishlist();
+            showNotification('Product removed from wishlist', 'info');
+        }
+
+        clearWishlist() {
+            if (confirm('Are you sure you want to remove all items?')) {
+                this.wishlist = [];
+                this.saveWishlist();
+                showNotification('Wishlist cleared', 'info');
+            }
+        }
+        
+        searchWishlist(query) {
+            const filtered = this.wishlist.filter(item => item.name.toLowerCase().includes(query.toLowerCase()));
+            this.renderWishlist(filtered);
+        }
+
+        renderWishlist(items = this.wishlist) {
+            if (this.wishlistStat) this.wishlistStat.textContent = this.wishlist.length;
+            
+            const emptyState = `<div class="empty-wishlist"><i class="fas fa-heart-broken"></i><p>Your wishlist is empty</p><div class="empty-wishlist-subtext">Start adding products to your wishlist.</div></div>`;
+            const modalEmptyState = document.getElementById('modal-empty-wishlist');
+
+            if (items.length === 0) {
+                if (this.wishlistGrid) this.wishlistGrid.innerHTML = emptyState;
+                if (this.modalWishlistGrid) this.modalWishlistGrid.innerHTML = '';
+                if (modalEmptyState) modalEmptyState.style.display = 'block';
+                return;
+            }
+
+            if (modalEmptyState) modalEmptyState.style.display = 'none';
+
+            const wishlistHTML = items.map(item => `
+                <div class="wishlist-item" data-id="${item.id}">
+                    <div class="wishlist-item-image"><img src="${item.image}" alt="${item.name}"></div>
+                    <div class="wishlist-item-details">
+                        <div class="wishlist-item-title">${item.name}</div>
+                        <div class="wishlist-item-price">R ${item.price}</div>
+                        <div class="wishlist-item-actions">
+                            <a href="${item.url}" class="wishlist-view-btn">View Product</a>
+                            <button class="wishlist-remove-btn"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            if (this.wishlistGrid) this.wishlistGrid.innerHTML = wishlistHTML;
+            if (this.modalWishlistGrid) this.modalWishlistGrid.innerHTML = wishlistHTML;
+
+            document.querySelectorAll('.wishlist-remove-btn').forEach(btn => {
+                const productId = btn.closest('.wishlist-item').dataset.id;
+                btn.onclick = () => this.removeFromWishlist(productId);
+            });
+        }
+        
+        openWishlistModal() {
+            const modal = document.getElementById('wishlist-modal');
+            modal.style.display = 'block';
+            setTimeout(() => modal.classList.add('visible'), 10);
+            this.renderWishlist();
+        }
+
+        closeWishlistModal() {
+            const modal = document.getElementById('wishlist-modal');
+            modal.classList.remove('visible');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+    }
+    
+    // =========================================================================
+    // NOTIFICATIONS TAB MANAGER CLASS
+    // =========================================================================
+     class NotificationsManager {
+        constructor() {
+            this.notifications = []; // Will be loaded from server/API in a real app
+            this.listEl = document.getElementById('notifications-list');
+            this.emptyEl = document.getElementById('empty-notifications');
+            this.init();
+        }
+
+        init() {
+            this.renderNotifications();
+            document.getElementById('clear-all-notifications')?.addEventListener('click', () => this.clearAllNotifications());
+        }
+
+        renderNotifications() {
+            if (this.notifications.length === 0) {
+                this.listEl.style.display = 'none';
+                this.emptyEl.style.display = 'block';
+            } else {
+                this.listEl.style.display = 'block';
+                this.emptyEl.style.display = 'none';
+                this.listEl.innerHTML = this.notifications.map((n, i) => `... content ...`).join('');
+            }
+        }
+
+        clearAllNotifications() {
+            if (confirm('Are you sure you want to clear all notifications?')) {
+                this.notifications = [];
+                this.renderNotifications();
+                showNotification('All notifications cleared', 'info');
+            }
+        }
+    }
+
+
+    // =========================================================================
+    // CORE PROFILE & AUTHENTICATION LOGIC
+    // =========================================================================
+
+    async function initializeProfilePage() {
+        const accessToken = sessionStorage.getItem('accessToken');
+        if (!accessToken) {
+            window.location.href = 'login.html';
+            return;
+        }
+        try {
+            const response = await fetch(API.getUser, { headers: { 'Authorization': `Bearer ${accessToken}` } });
+            if (!response.ok) throw new Error('Could not fetch user data.');
+            populateUI(await response.json());
+        } catch (error) {
+            showNotification(error.message, 'error', 'Session Expired');
+            setTimeout(handleLogout, 2000);
+        }
+    }
+
+    function populateUI(userData) {
+        const { given_name, family_name, email, UserCreateDate } = userData;
+        const firstName = given_name || '';
+        const lastName = family_name || '';
+
+        if (avatarInitialsEl) avatarInitialsEl.textContent = `${firstName[0] || ''}${lastName[0] || ''}`.toUpperCase() || 'U';
+        if (profileNameEl) profileNameEl.textContent = `${firstName} ${lastName}`.trim();
+        if (profileEmailEl) profileEmailEl.textContent = email || '';
+
+        if (document.getElementById('first-name')) document.getElementById('first-name').value = firstName;
+        if (document.getElementById('last-name')) document.getElementById('last-name').value = lastName;
+        if (document.getElementById('email')) document.getElementById('email').value = email || '';
+
+        if (memberSinceEl && UserCreateDate) {
+            const regDate = new Date(UserCreateDate);
+            memberSinceEl.textContent = `Member since ${regDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}`;
+        }
+    }
+
+    function handleLogout() {
+        sessionStorage.clear();
+        window.location.href = 'index.html';
+    }
+    
+    // --- Form Submission Handlers ---
+    
+    if (profileForm) {
+        profileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            showNotification('Updating profile...', 'info');
+            try {
+                const payload = {
+                    given_name: document.getElementById('first-name').value,
+                    family_name: document.getElementById('last-name').value
+                };
+                const response = await fetch(API.updateUser, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}` },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) throw new Error((await response.json()).message);
+                showNotification('Profile updated successfully!', 'success');
+                setTimeout(() => window.location.reload(), 1500);
+            } catch (error) {
+                showNotification(error.message, 'error', 'Update Failed');
+            }
+        });
+    }
+
+    if (privacyForm) {
+        privacyForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (newPassword !== confirmPassword) {
+                return showNotification('New passwords do not match.', 'error');
+            }
+            
+            showNotification('Changing password...', 'info');
+            try {
+                const payload = {
+                    previousPassword: document.getElementById('currentPassword').value,
+                    proposedPassword: newPassword
+                };
+                const response = await fetch(API.changePassword, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${sessionStorage.getItem('accessToken')}` },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) throw new Error((await response.json()).message);
+                showNotification('Password changed. Please log in again.', 'success');
+                setTimeout(handleLogout, 2000);
+            } catch (error) {
+                showNotification(error.message, 'error', 'Password Change Failed');
+            }
+        });
+    }
+    
+    // --- Other Event Listeners ---
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (confirm('Are you sure you want to logout?')) {
+                handleLogout();
+            }
+        });
+    }
+    
+    document.querySelectorAll('.toggle-password').forEach(button => {
+        button.addEventListener('click', function() {
+            const targetInput = document.getElementById(this.dataset.target);
+            if (targetInput) {
+                const isPassword = targetInput.type === 'password';
+                targetInput.type = isPassword ? 'text' : 'password';
+                this.classList.toggle('fa-eye', !isPassword);
+                this.classList.toggle('fa-eye-slash', isPassword);
+            }
+        });
+    });
+    
+    const confirmDeleteCheckbox = document.getElementById('confirm-delete');
+    const deleteAccountBtn = document.getElementById('delete-account-btn');
+    if (confirmDeleteCheckbox && deleteAccountBtn) {
+        confirmDeleteCheckbox.addEventListener('change', () => {
+            deleteAccountBtn.classList.toggle('active', confirmDeleteCheckbox.checked);
+        });
+        deleteAccountBtn.addEventListener('click', () => {
+            if (confirmDeleteCheckbox.checked && confirm('ARE YOU SURE? This action cannot be undone.')) {
+                 // Add your account deletion API call here
+                 showNotification('Account deletion initiated.', 'warning');
+                 // For now, just redirects:
+                 setTimeout(handleLogout, 2000);
+            }
+        });
+    }
+    
+    // =========================================================================
+    // INITIALIZE THE PAGE
+    // =========================================================================
+    initializeProfilePage();
+    window.wishlistManager = new WishlistManager();
+    window.notificationsManager = new NotificationsManager();
+    showSection('personal-info'); // Set default section
+});
+</script>
 </body>
 </html>
