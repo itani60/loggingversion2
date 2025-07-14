@@ -66,6 +66,14 @@ window.toggleRegisterPassword = function(fieldId) {
     }
 };
 
+window.closeForgotPasswordModal = function() {
+    toggleModal('forgotPasswordModal', false);
+};
+
+window.showLoginModal = function() {
+    toggleModal('loginModal', true);
+};
+
 function decodeJwt(token) {
     try {
         const base64Url = token.split('.')[1];
