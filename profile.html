@@ -2177,16 +2177,23 @@
     <script>
         // Profile Navigation and Section Management
         function showSection(sectionId) {
+            console.log('Switching to section:', sectionId); // Debug log
+            
             // Hide all sections
             const sections = document.querySelectorAll('.profile-section');
             sections.forEach(section => {
                 section.classList.remove('active');
+                section.style.display = 'none'; // Ensure hidden
             });
             
             // Show selected section
             const targetSection = document.getElementById(sectionId);
             if (targetSection) {
                 targetSection.classList.add('active');
+                targetSection.style.display = 'block'; // Ensure visible
+                console.log('Section found and activated:', sectionId);
+            } else {
+                console.error('Section not found:', sectionId);
             }
             
             // Update navigation active state
@@ -2198,7 +2205,23 @@
             const activeLink = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
             if (activeLink) {
                 activeLink.classList.add('active');
+                console.log('Navigation link activated');
             }
+        }
+
+        // Alternative navigation function using event listeners instead of onclick
+        function setupNavigation() {
+            const navLinks = document.querySelectorAll('.profile-nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const href = this.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        const sectionId = href.substring(1);
+                        showSection(sectionId);
+                    }
+                });
+            });
         }
 
         // Wishlist Management
@@ -2669,17 +2692,40 @@
 
         // Initialize all managers when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM Content Loaded - Initializing profile page');
+            
+            // Setup navigation first
+            setupNavigation();
+            
             // Initialize managers
-            window.wishlistManager = new WishlistManager();
-            window.accountSettingsManager = new AccountSettingsManager();
-            window.notificationsManager = new NotificationsManager();
+            try {
+                window.wishlistManager = new WishlistManager();
+                console.log('WishlistManager initialized');
+                
+                window.accountSettingsManager = new AccountSettingsManager();
+                console.log('AccountSettingsManager initialized');
+                
+                window.notificationsManager = new NotificationsManager();
+                console.log('NotificationsManager initialized');
+            } catch (error) {
+                console.error('Error initializing managers:', error);
+            }
 
             // Set default active section
-            showSection('personal-info');
+            setTimeout(() => {
+                showSection('personal-info');
+            }, 100);
+            
+            console.log('Profile page initialization complete');
         });
 
         // Global functions for inline event handlers
         window.showSection = showSection;
+        
+        // Ensure functions are available immediately
+        if (typeof window.showSection === 'undefined') {
+            window.showSection = showSection;
+        }
     </script>
 </body>
 </html>
