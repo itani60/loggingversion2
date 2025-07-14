@@ -2338,8 +2338,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (profileNameEl) profileNameEl.textContent = fullName;
         if (profileEmailEl) profileEmailEl.textContent = email;
 
-        if (document.getElementById('firstName')) document.getElementById('firstName').value = firstName;
-        if (document.getElementById('lastName')) document.getElementById('lastName').value = lastName;
+        // === MODIFICATION: Corrected element IDs to use hyphens ===
+        if (document.getElementById('first-name')) document.getElementById('first-name').value = firstName;
+        if (document.getElementById('last-name')) document.getElementById('last-name').value = lastName;
         if (document.getElementById('email')) document.getElementById('email').value = email;
     }
 
@@ -2381,8 +2382,8 @@ document.addEventListener('DOMContentLoaded', () => {
             updateBtn.classList.add('btn-loading');
 
             const payload = {
-                given_name: document.getElementById('firstName').value,
-                family_name: document.getElementById('lastName').value
+                given_name: document.getElementById('first-name').value,
+                family_name: document.getElementById('last-name').value
             };
 
             try {
