@@ -2021,7 +2021,9 @@
                 <!-- Account Settings Section -->
                 <div id="account-settings" class="profile-section">
                     <h2>Account Settings</h2>
-                    <form id="privacy-form">
+                    <!-- Password Change Form -->
+                    <form id="password-form">
+                        <h3 style="margin-bottom: 20px; color: #333; font-size: 18px;">Change Password</h3>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="currentPassword">Current Password</label>
@@ -2076,8 +2078,13 @@
                                 <input type="text" style="opacity: 0;" tabindex="-1">
                             </div>
                         </div>
+                        <button type="submit" class="btn">Change Password</button>
+                    </form>
+
+                    <!-- Email Notifications Form -->
+                    <form id="notifications-form" style="margin-top: 40px;">
+                        <h3 style="margin-bottom: 20px; color: #333; font-size: 18px;">Email Notifications</h3>
                         <div class="form-group">
-                            <label>Email Notifications</label>
                             <div class="checkbox-group">
                                 <div class="custom-checkbox">
                                     <input type="checkbox" id="price-alerts" name="price-alerts" checked>
@@ -2109,7 +2116,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn">Update Settings</button>
+                        <button type="submit" class="btn">Update Notifications</button>
+                    </form>
                         
                         <div class="delete-account-section">
                             <div class="delete-account-card">
@@ -2376,7 +2384,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const profileEmailEl = document.getElementById('profileEmail');
     const memberSinceEl = document.getElementById('memberSince');
     const profileForm = document.getElementById('profile-form');
-    const privacyForm = document.getElementById('privacy-form');
+    const passwordForm = document.getElementById('password-form');
+    const notificationsForm = document.getElementById('notifications-form');
     const logoutBtn = document.getElementById('logoutBtn');
     
     // =========================================================================
@@ -2661,8 +2670,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (privacyForm) {
-        privacyForm.addEventListener('submit', async (e) => {
+    if (passwordForm) {
+        passwordForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const newPassword = document.getElementById('newPassword').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
@@ -2688,10 +2697,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify(payload)
                 });
                 if (!response.ok) throw new Error((await response.json()).message);
-                showNotification('Password changed. Please log in again.', 'success');
-                setTimeout(handleLogout, 2000);
+                showNotification('Password changed successfully!', 'success');
+                // Clear the form
+                passwordForm.reset();
             } catch (error) {
                 showNotification(error.message, 'error', 'Password Change Failed');
+            }
+        });
+    }
+
+    if (notificationsForm) {
+        notificationsForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            showNotification('Updating notification preferences...', 'info');
+            
+            try {
+                // Here you would typically send the notification preferences to your API
+                const preferences = {
+                    priceAlerts: document.getElementById('price-alerts').checked,
+                    newDeals: document.getElementById('new-deals').checked,
+                    wishlistUpdates: document.getElementById('wishlist-updates').checked,
+                    newsletter: document.getElementById('newsletter').checked
+                };
+                
+                // Simulate API call - replace with actual API endpoint
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                showNotification('Notification preferences updated successfully!', 'success');
+            } catch (error) {
+                showNotification('Failed to update notification preferences.', 'error');
             }
         });
     }
