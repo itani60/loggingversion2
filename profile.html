@@ -1817,6 +1817,146 @@
         </nav>
     </header>
 
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-login" id="sidebarLogin"></div>
+        <div class="sidebar-search">
+            <input type="text" placeholder="Search categories..." id="sidebarSearchInput">
+        </div>
+        <div class="sidebar-header">
+            <h3>Browse Categories</h3>
+            <button class="close-sidebar" onclick="closeSidebar()" aria-label="Close menu">&times;</button>
+        </div>
+          <div class="menu-content">
+            <ul class="menu-items">
+                <li class="item">
+                    <div class="submenu-item" onclick="toggleSubmenu(this)">
+                        <span><i class=""></i> Cellphones & Tablets</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    <ul class="menu-items submenu">
+                        <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Cellphones & Tablets</li>
+                        <li class="item"><a href="smartphones.html">Smartphones</a></li>
+                        <li class="item"><a href="#tablets">Tablets</a></li>
+                        <li class="item"><a href="#phone-accessories">Accessories</a></li>
+                    </ul>
+                </li>
+
+                   <li class="item">
+                     <div class="submenu-item" onclick="toggleSubmenu(this)">
+                         <span><i class=""></i>Laptops</span>
+                         <i class="fa-solid fa-chevron-right"></i>
+                     </div>
+                     <ul class="menu-items submenu">
+                         <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Laptops & Accessories</li>
+                         <li class="item"><a href="#printers">Windows Laptops</a></li>
+                         <li class="item"><a href="#monitors">Chromebooks</a></li>
+                         <li class="item"><a href="#keyboards-mice">Macbooks</a></li>
+                         <li class="item"><a href="#storage-devices">Gaming Laptops</a></li>
+                         <li class="item"><a href="#computer-speakers">Accessories</a></li>
+                    
+                     </ul>
+                </li>
+
+
+                <li class="item">
+                     <div class="submenu-item" onclick="toggleSubmenu(this)">
+                         <span><i class=""></i> Computers & Accessories</span>
+                         <i class="fa-solid fa-chevron-right"></i>
+                     </div>
+                     <ul class="menu-items submenu">
+                         <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Computers & Accessories</li>
+                         <li class="item"><a href="#printers">Printers</a></li>
+                         <li class="item"><a href="#monitors">Monitors</a></li>
+                         <li class="item"><a href="#keyboards-mice">Keyboards & Mice</a></li>
+                         <li class="item"><a href="#storage-devices">Storage Devices</a></li>
+                         <li class="item"><a href="#computer-speakers">Computer Speakers</a></li>
+                         <li class="item"><a href="#webcams">Webcams</a></li>
+                     </ul>
+                </li>
+                <li class="item">
+                    <div class="submenu-item" onclick="toggleSubmenu(this)">
+                        <span><i class=""></i> TV & Streaming</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    <ul class="menu-items submenu">
+                        <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> TV & Streaming</li>
+                        <li class="item"><a href="#televisions">Televisions</a></li>
+                        <li class="item"><a href="#streaming-devices">Streaming Devices</a></li>
+                        <li class="item"><a href="#tv-mounts">TV Mounts</a></li>
+                        <li class="item"><a href="#remote-controls">Remote Controls</a></li>
+                    </ul>
+                </li>
+
+                   <li class="item">
+                     <div class="submenu-item" onclick="toggleSubmenu(this)">
+                         <span><i class=""></i>Audio</span>
+                         <i class="fa-solid fa-chevron-right"></i>
+                     </div>
+                     <ul class="menu-items submenu">
+                         <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Audio</li>
+                         <li class="item"><a href="#printers">Soundbars</a></li>
+                         <li class="item"><a href="#monitors">Earbuds</a></li>
+                         <li class="item"><a href="#keyboards-mice">Headphones</a></li>
+                         <li class="item"><a href="#storage-devices">Bluetooth Speakers</a></li>
+                         <li class="item"><a href="#computer-speakers">Home Audio Systems</a></li>
+                    
+                     </ul>
+                </li>
+
+                     <li class="item">
+                     <div class="submenu-item" onclick="toggleSubmenu(this)">
+                         <span><i class=""></i>Wearables Devices</span>
+                         <i class="fa-solid fa-chevron-right"></i>
+                     </div>
+                     <ul class="menu-items submenu">
+                         <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Wearables Devices</li>
+                         <li class="item"><a href="#printers">Smartwatches</a></li>
+                         <li class="item"><a href="#monitors">Fitness Trackers</a></li>
+                         <li class="item"><a href="#keyboards-mice">VR Headsets</a></li>
+                        
+                     </ul>
+                </li>
+
+
+                     <li class="item">
+                     <div class="submenu-item" onclick="toggleSubmenu(this)">
+                         <span><i class=""></i>Consoles</span>
+                         <i class="fa-solid fa-chevron-right"></i>
+                     </div>
+                     <ul class="menu-items submenu">
+                         <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Consoles</li>
+                         <li class="item"><a href="#printers">Consoles</a></li>
+                         <li class="item"><a href="#monitors">Console Accessories</a></li>
+                     </ul>
+                </li>
+                   <li class="item">
+                     <div class="submenu-item" onclick="toggleSubmenu(this)">
+                         <span><i class=""></i> Appliances</span>
+                         <i class="fa-solid fa-chevron-right"></i>
+                     </div>
+                     <ul class="menu-items submenu">
+                         <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Appliances</li>
+                         <li class="item">
+                             <div class="submenu-item" onclick="toggleSubmenu(this)">
+                                 <span>Kitchen Appliances</span>
+                                 <i class="fa-solid fa-chevron-right"></i>
+                             </div>
+                             <ul class="menu-items submenu">
+                                 <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Kitchen Appliances</li>
+                                 <li class="item"><a href="#refrigerators">Refrigerators</a></li>
+                                 <li class="item"><a href="#microwaves">Microwaves</a></li>
+                                 <li class="item"><a href="#coffee-machines">Coffee Machines</a></li>
+                                 <li class="item"><a href="#blenders">Blenders</a></li>
+                             </ul>
+                         </li>
+                         <li class="item"><a href="#vacuum-cleaners">Vacuum Cleaners</a></li>
+                         <li class="item"><a href="#air-conditioners">Air Conditioners</a></li>
+                     </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <div class="profile-container">
         <!-- Profile Sidebar -->
         <div class="profile-sidebar">
@@ -1895,6 +2035,27 @@
                                 <div style="position: relative;">
                                     <input type="password" id="newPassword" name="newPassword">
                                     <i class="fas fa-eye toggle-password" data-target="newPassword" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #777;"></i>
+                                </div>
+                                <div class="password-strength" id="passwordStrength" style="margin-top: 10px;">
+                                    <div class="strength-title" style="font-size: 14px; font-weight: 500; color: #333; margin-bottom: 8px;">Password Requirements</div>
+                                    <div class="strength-indicators" style="display: flex; flex-direction: column; gap: 5px;">
+                                        <div class="strength-item" id="length-check" style="display: flex; align-items: center; font-size: 13px; color: #999;">
+                                            <i class="fas fa-times" style="margin-right: 8px; color: #f44336; width: 12px;"></i>
+                                            <span>8+ characters</span>
+                                        </div>
+                                        <div class="strength-item" id="upper-check" style="display: flex; align-items: center; font-size: 13px; color: #999;">
+                                            <i class="fas fa-times" style="margin-right: 8px; color: #f44336; width: 12px;"></i>
+                                            <span>Uppercase letter</span>
+                                        </div>
+                                        <div class="strength-item" id="number-check" style="display: flex; align-items: center; font-size: 13px; color: #999;">
+                                            <i class="fas fa-times" style="margin-right: 8px; color: #f44336; width: 12px;"></i>
+                                            <span>Number</span>
+                                        </div>
+                                        <div class="strength-item" id="special-check" style="display: flex; align-items: center; font-size: 13px; color: #999;">
+                                            <i class="fas fa-times" style="margin-right: 8px; color: #f44336; width: 12px;"></i>
+                                            <span>Special character</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -2131,6 +2292,62 @@
     </footer>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+
+    // Password validation functions
+    function validatePasswordRequirements(password) {
+        const hasLength = password.length >= 8;
+        const hasUpper = /[A-Z]/.test(password);
+        const hasNumber = /\d/.test(password);
+        const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        
+        return hasLength && hasUpper && hasNumber && hasSpecial;
+    }
+
+    function updatePasswordStrength(password) {
+        const lengthCheck = document.getElementById('length-check');
+        const upperCheck = document.getElementById('upper-check');
+        const numberCheck = document.getElementById('number-check');
+        const specialCheck = document.getElementById('special-check');
+
+        // Check length requirement
+        const hasLength = password.length >= 8;
+        updateRequirementStatus(lengthCheck, hasLength);
+
+        // Check uppercase requirement
+        const hasUpper = /[A-Z]/.test(password);
+        updateRequirementStatus(upperCheck, hasUpper);
+
+        // Check number requirement
+        const hasNumber = /\d/.test(password);
+        updateRequirementStatus(numberCheck, hasNumber);
+
+        // Check special character requirement
+        const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        updateRequirementStatus(specialCheck, hasSpecial);
+    }
+
+    function updateRequirementStatus(element, isValid) {
+        const icon = element.querySelector('i');
+        const text = element.querySelector('span');
+        
+        if (isValid) {
+            icon.className = 'fas fa-check';
+            icon.style.color = '#4caf50';
+            text.style.color = '#4caf50';
+        } else {
+            icon.className = 'fas fa-times';
+            icon.style.color = '#f44336';
+            text.style.color = '#999';
+        }
+    }
+
+    // Add event listener for password input
+    const newPasswordInput = document.getElementById('newPassword');
+    if (newPasswordInput) {
+        newPasswordInput.addEventListener('input', function() {
+            updatePasswordStrength(this.value);
+        });
+    }
 
     // =========================================================================
     // CONFIGURATION & API ENDPOINTS
@@ -2444,6 +2661,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (newPassword !== confirmPassword) {
                 return showNotification('New passwords do not match.', 'error');
             }
+
+            // Validate password requirements
+            if (!validatePasswordRequirements(newPassword)) {
+                return showNotification('Password does not meet all requirements.', 'error');
+            }
             
             showNotification('Changing password...', 'info');
             try {
@@ -2513,5 +2735,207 @@ document.addEventListener('DOMContentLoaded', () => {
     showSection('personal-info'); // Set default section
 });
 </script>
+
+<script src="sidebar.js"></script>
+<script src="search-suggestions.js"></script>
+<script src="account-authentication.js"></script>
+
+<!-- Login Modal -->
+<div class="login-modal" id="loginModal">
+    <div class="login-modal-container">
+        <div class="login-modal-header">
+            <button class="login-modal-close" id="loginModalClose">&times;</button>
+            <div class="login-modal-logo-container">
+                <img src="https://comparehub-smartphone-images.s3.af-south-1.amazonaws.com/IMG_20250625_174144.jpg" alt="Logo">
+            </div>
+        </div>
+        <div class="login-modal-form-container">
+            <div class="login-modal-form-header">
+                <h2>Welcome Back</h2>
+                <p>Please sign in to your account to continue</p>
+            </div>
+            
+            <div id="loginAlertContainer"></div>
+            <form class="login-modal-form" id="loginModalForm">
+                <div class="login-modal-form-group">
+                    <label for="loginModalEmail">Email Address</label>
+                    <input type="email" id="loginModalEmail" name="email" placeholder="Enter your email" required>
+                </div>
+                <div class="login-modal-form-group">
+                    <label for="loginModalPassword">Password</label>
+                    <div class="login-modal-input-wrapper">
+                        <input type="password" id="loginModalPassword" name="password" placeholder="Enter your password" required>
+                        <button type="button" class="login-modal-password-toggle" id="loginModalPasswordToggle">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="login-modal-forgot-password">
+                    <a href="#" id="loginModalForgotPassword">Forgot Password?</a>
+                </div>
+                <button type="submit" class="login-modal-btn" id="loginModalBtn">
+                    <span id="loginModalBtnText">Sign In</span>
+                    <div class="login-modal-spinner" id="loginModalSpinner" style="display: none;"></div>
+                </button>
+            </form>
+            <div class="login-modal-register-link">
+                Don't have an account? <a href="#" id="loginModalRegisterLink">Sign up here</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Register Modal -->
+<div class="register-modal" id="registerModal">
+    <div class="register-modal-container">
+        <div class="register-modal-header">
+            <button class="register-modal-close" id="registerModalClose">&times;</button>
+            <div class="register-modal-logo-container">
+                <img src="https://comparehub-smartphone-images.s3.af-south-1.amazonaws.com/IMG_20250625_174144.jpg"
+                     alt="CompareHub Logo">
+            </div>
+        </div>
+        
+        <div class="register-modal-form-container">
+            <div class="register-modal-form-header">
+                <h2>Create Account</h2>
+                <p>Join thousands saving money with smart comparisons</p>
+            </div>
+            
+            <div id="registerAlertContainer"></div>
+            
+            <form id="registerModalForm" autocomplete="off">
+                <div class="register-modal-form-group">
+                    <div class="register-modal-input-group">
+                        <input type="text" class="register-modal-input" id="registerFirstname" placeholder="First Name" required>
+                        <i class="fas fa-user register-modal-input-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="register-modal-form-group">
+                    <div class="register-modal-input-group">
+                        <input type="text" class="register-modal-input" id="registerLastname" placeholder="Last Name" required>
+                        <i class="fas fa-user register-modal-input-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="register-modal-form-group">
+                    <div class="register-modal-input-group">
+                        <input type="email" class="register-modal-input" id="registerEmail" placeholder="Email Address" required>
+                        <i class="fas fa-envelope register-modal-input-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="register-modal-form-group">
+                    <div class="register-modal-input-group">
+                        <input type="password" class="register-modal-input" id="registerPassword" placeholder="Password" required>
+                        <button type="button" class="register-modal-password-toggle" onclick="toggleRegisterPassword('registerPassword')">
+                            <i class="fas fa-eye" id="registerPassword-eye"></i>
+                        </button>
+                    </div>
+                    <div class="register-modal-password-strength">
+                        <div class="register-modal-strength-title">Password Requirements</div>
+                        <div class="register-modal-strength-indicators">
+                            <div class="register-modal-strength-item" id="register-length-check">
+                                <i class="fas fa-times"></i>
+                                <span>8+ characters</span>
+                            </div>
+                            <div class="register-modal-strength-item" id="register-upper-check">
+                                <i class="fas fa-times"></i>
+                                <span>Uppercase letter</span>
+                            </div>
+                            <div class="register-modal-strength-item" id="register-number-check">
+                                <i class="fas fa-times"></i>
+                                <span>Number</span>
+                            </div>
+                            <div class="register-modal-strength-item" id="register-special-check">
+                                <i class="fas fa-times"></i>
+                                <span>Special character</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="register-modal-form-group">
+                    <div class="register-modal-input-group">
+                        <input type="password" class="register-modal-input" id="registerConfirmPassword" placeholder="Confirm Password" required>
+                        <button type="button" class="register-modal-password-toggle" onclick="toggleRegisterPassword('registerConfirmPassword')">
+                            <i class="fas fa-eye" id="registerConfirmPassword-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="register-modal-checkbox-group">
+                    <div class="register-modal-checkbox">
+                        <input type="checkbox" id="registerTerms" required style="position: absolute; opacity: 0; cursor: pointer; height: 100%; width: 100%; margin: 0; z-index: 1;">
+                        <div class="register-modal-checkmark"></div>
+                    </div>
+                    <label for="registerTerms" class="register-modal-checkbox-label" style="cursor: pointer;">
+                        I agree to the <a href="Terms-of-Service.html" target="_blank" style="pointer-events: auto;">Terms of Service</a> and <a href="privacy-policy.html" target="_blank" style="pointer-events: auto;">Privacy Policy</a>
+                    </label>
+                </div>
+                
+                <button type="submit" class="register-modal-btn" id="registerModalBtn">
+                    <i class="fas fa-user-plus"></i>
+                    <span id="registerModalBtnText">Create Account</span>
+                    <div class="register-modal-spinner" id="registerModalSpinner" style="display: none;"></div>
+                </button>
+            </form>
+            
+            <div class="register-modal-divider">
+                <span>Already have an account?</span>
+            </div>
+            
+            <div class="register-modal-login-link">
+                <a href="#" id="registerModalLoginLink">
+                    <i class="fas fa-arrow-left"></i> Sign in instead
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Forgot Password Modal -->
+<div id="forgotPasswordModal" class="forgot-password-modal">
+    <div class="forgot-password-modal-container">
+        <div class="forgot-password-modal-header">
+            <button class="forgot-password-modal-close" onclick="closeForgotPasswordModal()">&times;</button>
+            <div class="forgot-password-modal-icon">
+                <i class="fas fa-key"></i>
+            </div>
+        </div>
+        <div class="forgot-password-modal-form-container">
+            <div class="forgot-password-modal-form-header">
+                <h2>Reset Password</h2>
+                <p>Enter your email address and we'll send you a code to reset your password.</p>
+            </div>
+            
+            <div id="forgotPasswordAlert" class="forgot-password-modal-alert" style="display: none;"></div>
+            
+            <form id="forgotPasswordForm">
+                <div class="forgot-password-modal-form-group">
+                    <label for="forgotPasswordEmail">Email Address</label>
+                    <input
+                        type="email"
+                        id="forgotPasswordEmail"
+                        name="email"
+                        placeholder="Enter your email address"
+                        required
+                    >
+                </div>
+                
+                <button type="submit" class="forgot-password-modal-btn" id="forgotPasswordBtn">
+                    <span id="forgotPasswordBtnText">Send Reset Code</span>
+                    <div id="forgotPasswordSpinner" class="forgot-password-modal-spinner" style="display: none;"></div>
+                </button>
+            </form>
+            
+            <div class="forgot-password-modal-back-link">
+                <a href="#" onclick="closeForgotPasswordModal(); showLoginModal();">Back to Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
