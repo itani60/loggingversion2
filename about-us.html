@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - CompareHubPrices</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="wishlistmodal-mobile.css">
+    <style>
+       
+        .main-container {
+            padding-top: 120px; 
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                padding-top: 110px; 
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-container {
+                padding-top: 100px; 
+            }
+        }
+
+      
+        .about-us-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .about-us-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .about-us-header h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .about-us-header p {
+            font-size: 18px;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .about-us-section {
+            margin-bottom: 60px;
+        }
+
+        .about-us-section h2 {
+            font-size: 28px;
+            color: #4285f4;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .about-us-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .mission-vision-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .mission-box, .vision-box {
+            flex: 1;
+            min-width: 300px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .mission-box:hover, .vision-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .mission-box h3, .vision-box h3 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .mission-box h3 i, .vision-box h3 i {
+            color: #4285f4;
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .team-member {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-member-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .team-member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-member:hover .team-member-image img {
+            transform: scale(1.05);
+        }
+
+        .team-member-info {
+            padding: 20px;
+        }
+
+        .team-member-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .team-member-position {
+            font-size: 16px;
+            color: #4285f4;
+            margin-bottom: 15px;
+        }
+
+        .team-member-bio {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .team-member-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .team-member-social a {
+            color: #777;
+            font-size: 18px;
+            transition: color 0.2s ease;
+        }
+
+        .team-member-social a:hover {
+            color: #4285f4;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .value-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid #4285f4;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .value-card-icon {
+            font-size: 36px;
+            color: #4285f4;
+            margin-bottom: 15px;
+        }
+
+        .value-card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .value-card-description {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 40px auto 0;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background-color: #e0e0e0;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            display: flex;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: calc(50% - 30px);
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            transform: rotate(45deg);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -10px;
+        }
+
+        .timeline-date {
+            position: absolute;
+            top: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #4285f4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-date {
+            left: calc(50% - 30px);
+        }
+
+        .timeline-item:nth-child(even) .timeline-date {
+            right: calc(50% - 30px);
+        }
+
+        .timeline-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .timeline-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: row !important;
+            }
+
+            .timeline-content {
+                width: calc(100% - 80px);
+                margin-left: 80px;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -10px;
+                right: auto;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-date,
+            .timeline-item:nth-child(even) .timeline-date {
+                left: 0;
+                right: auto;
+            }
+
+            .mission-vision-container {
+                flex-direction: column;
+            }
+        }
+
+        /* Contact section */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-card {
+            flex: 1;
+            min-width: 250px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #f0f7ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-icon i {
+            font-size: 24px;
+            color: #4285f4;
+        }
+
+        .contact-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .contact-details {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .contact-details a {
+            color: #4285f4;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-details a:hover {
+            color: #2b68ca;
+            text-decoration: underline;
+        }
+
+        /* Login Modal Styling - Based on login.html design */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            padding: 20px;
+        }
+
+        .login-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .login-modal-container {
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            overflow: hidden;
+            transform: translateY(30px) scale(0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            position: relative;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .login-modal.active .login-modal-container {
+            transform: translateY(0) scale(1);
+        }
+
+        .login-modal-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f80101, #ff5757);
+        }
+
+        .login-modal-header {
+            padding: 40px 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .login-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .login-modal-close:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .login-modal-logo-container {
+            width: 100%;
+            max-width: 300px;
+            height: 120px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .login-modal-logo-container img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            border-radius: 16px;
+        }
+
+        .login-modal-form-container {
+            padding: 40px;
+        }
+
+        .login-modal-form-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .login-modal-form-header h2 {
+            color: #333;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .login-modal-form-header p {
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .login-modal-form-group {
+            margin-bottom: 20px;
+            position: relative;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .login-modal-form-group:nth-child(1) { animation-delay: 0.1s; }
+        .login-modal-form-group:nth-child(2) { animation-delay: 0.2s; }
+
+        .login-modal-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .login-modal-input-wrapper {
+            position: relative;
+        }
+
+        .login-modal-form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            outline: none;
+            font-weight: 400;
+            box-sizing: border-box;
+        }
+
+        .login-modal-form-group input::placeholder {
+            color: #666;
+            opacity: 0.7;
+        }
+
+        .login-modal-form-group input:focus {
+            border-color: #f80101;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(248, 1, 1, 0.1);
+        }
+
+        .login-modal-password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .login-modal-password-toggle:hover {
+            color: #f80101;
+            background: rgba(248, 1, 1, 0.1);
+        }
+
+        .login-modal-forgot-password {
+            text-align: right;
+            margin: -6px 0 20px;
+        }
+
+        .login-modal-forgot-password a {
+            color: #f80101;
+            font-size: 0.9rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .login-modal-forgot-password a:hover {
+            color: #d80000;
+            text-decoration: underline;
+        }
+
+        .login-modal-btn {
+            width: 100%;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #f80101, #d80000);
+            color: white;
+            border: none;
+            animation: fadeInUp 0.6s ease-out 0.6s both;
+        }
+
+        .login-modal-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .login-modal-btn:hover::before {
+            left: 100%;
+        }
+
+        .login-modal-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(248, 1, 1, 0.3);
+        }
+
+        .login-modal-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-modal-btn:disabled {
+            background: #666;
+            color: white;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-modal-register-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .login-modal-register-link a {
+            color: #f80101;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .login-modal-register-link a:hover {
+            color: #d80000;
+            text-decoration: underline;
+        }
+
+        .login-modal-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @media (max-width: 640px) {
+            .login-modal-container {
+                max-width: 350px;
+                margin: 0 15px;
+            }
+
+            .login-modal-header,
+            .login-modal-form-container {
+                padding: 20px;
+            }
+
+            .login-modal-form-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .login-modal-logo-container {
+                max-width: 200px;
+                height: 80px;
+                margin-bottom: 20px;
+            }
+
+            .login-modal-form-group {
+                margin-bottom: 16px;
+            }
+
+            .login-modal-form-group input {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+
+            .login-modal-btn {
+                padding: 12px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-modal-container {
+                max-width: 320px;
+            }
+
+            .login-modal-header,
+            .login-modal-form-container {
+                padding: 16px;
+            }
+
+            .login-modal-form-header {
+                margin-bottom: 20px;
+            }
+
+            .login-modal-form-header h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <img src="https://comparehub-smartphone-images.s3.af-south-1.amazonaws.com/IMG_20250625_174144.jpg" alt="CompareHubPrices" class="logo-image">
+                </a>
+            </div>
+            <div class="search-container">
+                <form id="search-form">
+                    <input type="text" name="q" class="search-input" placeholder="Search......." id="searchInput">
+                    <button type="submit" class="search-button" aria-label="Search"><i class="fas fa-search"></i></button>
+                </form>
+                <div class="search-suggestions" id="searchSuggestions">
+                    <div class="suggestions-header">
+                        <span class="all-results">All</span>
+                        <span class="search-query" id="searchQuery">results</span>
+                    </div>
+                    <div class="suggestions-grid" id="suggestionsGrid"></div>
+                </div>
+            </div>
+        </div>
+        <nav class="category-nav">
+            <a href="best-deals.html"><i class=""></i> Best deals</a>
+            <a href="#new-arrivals"><i class=""></i> New Arrivals</a>
+            <a href="#" id="wishlist-link"><i class="fas fa-heart"></i> Wishlist</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-login" id="sidebarLogin"></div>
+            <div class="sidebar-search">
+                <input type="text" placeholder="Search categories..." id="sidebarSearchInput">
+            </div>
+            <div class="sidebar-header">
+                <h3>Browse Categories</h3>
+                <button class="close-sidebar" onclick="closeSidebar()" aria-label="Close menu">&times;</button>
+            </div>
+              <div class="menu-content">
+                <ul class="menu-items">
+                    <li class="item">
+                        <div class="submenu-item" onclick="toggleSubmenu(this)">
+                            <span><i class=""></i> Cellphones & Tablets</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                        <ul class="menu-items submenu">
+                            <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Cellphones & Tablets</li>
+                            <li class="item"><a href="smartphones.html">Smartphones</a></li>
+                            <li class="item"><a href="#tablets">Tablets</a></li>
+                            <li class="item"><a href="#phone-accessories">Accessories</a></li>
+                        </ul>
+                    </li>
+
+                       <li class="item">
+                         <div class="submenu-item" onclick="toggleSubmenu(this)">
+                             <span><i class=""></i>Laptops</span>
+                             <i class="fa-solid fa-chevron-right"></i>
+                         </div>
+                         <ul class="menu-items submenu">
+                             <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Laptops & Accessories</li>
+                             <li class="item"><a href="#printers">Windows Laptops</a></li>
+                             <li class="item"><a href="#monitors">Chromebooks</a></li>
+                             <li class="item"><a href="#keyboards-mice">Macbooks</a></li>
+                             <li class="item"><a href="#storage-devices">Gaming Laptops</a></li>
+                             <li class="item"><a href="#computer-speakers">Accessories</a></li>
+                        
+                         </ul>
+                    </li>
+
+
+                    <li class="item">
+                         <div class="submenu-item" onclick="toggleSubmenu(this)">
+                             <span><i class=""></i> Computers & Accessories</span>
+                             <i class="fa-solid fa-chevron-right"></i>
+                         </div>
+                         <ul class="menu-items submenu">
+                             <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Computers & Accessories</li>
+                             <li class="item"><a href="#printers">Printers</a></li>
+                             <li class="item"><a href="#monitors">Monitors</a></li>
+                             <li class="item"><a href="#keyboards-mice">Keyboards & Mice</a></li>
+                             <li class="item"><a href="#storage-devices">Storage Devices</a></li>
+                             <li class="item"><a href="#computer-speakers">Computer Speakers</a></li>
+                             <li class="item"><a href="#webcams">Webcams</a></li>
+                         </ul>
+                    </li>
+                    <li class="item">
+                        <div class="submenu-item" onclick="toggleSubmenu(this)">
+                            <span><i class=""></i> TV & Streaming</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                        <ul class="menu-items submenu">
+                            <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> TV & Streaming</li>
+                            <li class="item"><a href="#televisions">Televisions</a></li>
+                            <li class="item"><a href="#streaming-devices">Streaming Devices</a></li>
+                            <li class="item"><a href="#tv-mounts">TV Mounts</a></li>
+                            <li class="item"><a href="#remote-controls">Remote Controls</a></li>
+                        </ul>
+                    </li>
+
+                       <li class="item">
+                         <div class="submenu-item" onclick="toggleSubmenu(this)">
+                             <span><i class=""></i>Audio</span>
+                             <i class="fa-solid fa-chevron-right"></i>
+                         </div>
+                         <ul class="menu-items submenu">
+                             <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Audio</li>
+                             <li class="item"><a href="#printers">Soundbars</a></li>
+                             <li class="item"><a href="#monitors">Earbuds</a></li>
+                             <li class="item"><a href="#keyboards-mice">Headphones</a></li>
+                             <li class="item"><a href="#storage-devices">Bluetooth Speakers</a></li>
+                             <li class="item"><a href="#computer-speakers">Home Audio Systems</a></li>
+                        
+                         </ul>
+                    </li>
+
+                         <li class="item">
+                         <div class="submenu-item" onclick="toggleSubmenu(this)">
+                             <span><i class=""></i>Wearables Devices</span>
+                             <i class="fa-solid fa-chevron-right"></i>
+                         </div>
+                         <ul class="menu-items submenu">
+                             <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Wearables Devices</li>
+                             <li class="item"><a href="#printers">Smartwatches</a></li>
+                             <li class="item"><a href="#monitors">Fitness Trackers</a></li>
+                             <li class="item"><a href="#keyboards-mice">VR Headsets</a></li>
+                            
+                         </ul>
+                    </li>
+
+
+                         <li class="item">
+                         <div class="submenu-item" onclick="toggleSubmenu(this)">
+                             <span><i class=""></i>Consoles</span>
+                             <i class="fa-solid fa-chevron-right"></i>
+                         </div>
+                         <ul class="menu-items submenu">
+                             <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Consoles</li>
+                             <li class="item"><a href="#printers">Consoles</a></li>
+                             <li class="item"><a href="#monitors">Console Accessories</a></li>
+                         </ul>
+                    </li>
+                       <li class="item">
+                         <div class="submenu-item" onclick="toggleSubmenu(this)">
+                             <span><i class=""></i> Appliances</span>
+                             <i class="fa-solid fa-chevron-right"></i>
+                         </div>
+                         <ul class="menu-items submenu">
+                             <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Appliances</li>
+                             <li class="item">
+                                 <div class="submenu-item" onclick="toggleSubmenu(this)">
+                                     <span>Kitchen Appliances</span>
+                                     <i class="fa-solid fa-chevron-right"></i>
+                                 </div>
+                                 <ul class="menu-items submenu">
+                                     <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Kitchen Appliances</li>
+                                     <li class="item"><a href="#refrigerators">Refrigerators</a></li>
+                                     <li class="item"><a href="#microwaves">Microwaves</a></li>
+                                     <li class="item"><a href="#coffee-machines">Coffee Machines</a></li>
+                                     <li class="item"><a href="#blenders">Blenders</a></li>
+                                 </ul>
+                             </li>
+                             <li class="item"><a href="#vacuum-cleaners">Vacuum Cleaners</a></li>
+                             <li class="item"><a href="#air-conditioners">Air Conditioners</a></li>
+                         </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <div class="about-us-container">
+                <div class="about-us-header">
+                    <h1>About CompareHub</h1>
+                    <p>Your trusted destination for comparing prices and finding the best deals on electronics and tech products across South Africa.</p>
+                </div>
+
+                <div class="about-us-section">
+                    <h2>Our Story</h2>
+                    <p>Our story started this year with a clear vision: to create a comprehensive platform that compares different products from different retailers, showing price comparisons from different stores along with detailed specifications.</p>
+                    <p>Our main goal was to provide users with essential features including wishlist functionality and drop price alerts, making it easier for consumers to track their favorite products and get notified when prices drop.</p>
+                    <p>We believe that shopping for technology should be straightforward and transparent. By aggregating prices from trusted retailers across South Africa, we empower you to find the best deals without the hassle of visiting multiple websites.</p>
+                </div>
+
+                <div class="about-us-section">
+                    <h2>Our Mission & Vision</h2>
+                    <div class="mission-vision-container">
+                        <div class="mission-box">
+                            <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                            <p>To simplify the shopping experience by providing consumers with transparent, comprehensive price comparisons and product information, enabling them to make confident, informed purchasing decisions.</p>
+                        </div>
+                        <div class="vision-box">
+                            <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                            <p>To become the most trusted and comprehensive price comparison platform in South Africa, known for our accuracy, transparency, and commitment to consumer empowerment.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-us-section">
+                    <h2>Our Values</h2>
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <div class="value-card-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="value-card-title">Transparency</div>
+                            <div class="value-card-description">We believe in complete transparency in all our operations, from how we collect data to how we present information to our users.</div>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-card-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <div class="value-card-title">Accuracy</div>
+                            <div class="value-card-description">We are committed to providing the most accurate and up-to-date information possible, ensuring our users can trust the data they see.</div>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-card-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="value-card-title">User-Centric</div>
+                            <div class="value-card-description">Everything we do is focused on creating the best possible experience for our users, making comparison shopping simple and effective.</div>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-card-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="value-card-title">Innovation</div>
+                            <div class="value-card-description">We continuously strive to improve our platform with new features and technologies that enhance the user experience.</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="about-us-section">
+                    <h2>Contact Us</h2>
+                    <p>Have questions, feedback, or suggestions? We'd love to hear from you!</p>
+                    <div class="contact-info">
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-title">Email Us</div>
+                            <div class="contact-details">
+                                <a href="">comong soon</a>
+                            </div>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-title">Call Us</div>
+                            <div class="contact-details">
+                                <a href="">coming soon</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    
+ 
+    <div class="notification-container" id="notificationContainer"></div>
+    
+
+    <div id="wishlist-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-actions">
+                    <a href="profile.html#wishlist" class="view-all-btn">View All</a>
+                    <button class="remove-all-btn" id="clear-wishlist-btn">Remove All</button>
+                    <span class="wishlist-close-modal" id="close-wishlist-modal">&times;</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div id="wishlist-items" class="wishlist-grid">
+                 
+                </div>
+                <div id="modal-empty-wishlist" class="empty-wishlist" style="display: none;">
+                    <i class="far fa-heart"></i>
+                    <p>Your wishlist is empty</p>
+                    <p class="empty-wishlist-subtext">Add items to your wishlist by clicking the heart icon on products</p>
+                    <a href="smartphones.html" class="browse-products-btn">Browse Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+    <div class="mobile-search-modal" id="mobileSearchModal">
+        <div class="mobile-search-modal-header">
+            <span class="mobile-search-close" id="mobileSearchClose">&times;</span>
+            <form class="mobile-search-form" id="mobileSearchForm">
+                <input type="text" class="mobile-search-input" id="mobileSearchInput" placeholder="Search...">
+                <button type="submit" class="mobile-search-button"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+        <div class="mobile-search-suggestions" id="mobileSearchSuggestions">
+            <div class="mobile-suggestions-header">
+                <span class="mobile-all-results">All</span>
+                <span class="mobile-search-query" id="mobileSearchQuery">results</span>
+            </div>
+            <div class="mobile-suggestions-grid" id="mobileSuggestionsGrid"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About CompareHubPrices</h3>
+                <ul>
+                    <li><a href="about-us.html" class="active">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Help & Support</h3>
+                <ul>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#faq">FAQs</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="Terms-of-Service.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="newsletter-section">
+                    <h4>Get the Best Deals in Your Inbox</h4>
+                    <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                        <input type="email" placeholder="Enter your email address" required aria-label="Email address for newsletter">
+                        <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CompareHub Prices. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function adjustContentPadding() {
+            const header = document.querySelector('.header');
+            const mainContainer = document.querySelector('.main-container');
+            const headerHeight = header.offsetHeight;
+            mainContainer.style.paddingTop = `${headerHeight}px`;
+        }
+
+        window.addEventListener('load', adjustContentPadding);
+        window.addEventListener('resize', adjustContentPadding);
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          
+          const searchInput = document.getElementById('searchInput');
+          const searchButton = document.querySelector('.search-button');
+          const mobileSearchModal = document.getElementById('mobileSearchModal');
+          const mobileSearchClose = document.getElementById('mobileSearchClose');
+          const mobileSearchInput = document.getElementById('mobileSearchInput');
+          const mobileSearchForm = document.getElementById('mobileSearchForm');
+          const mobileSearchQuery = document.getElementById('mobileSearchQuery');
+          const mobileSuggestionsGrid = document.getElementById('mobileSuggestionsGrid');
+          
+        
+          function isMobilePhone() {
+              return window.innerWidth <= 768 &&
+                    (typeof window.orientation !== 'undefined' ||
+                     navigator.userAgent.indexOf('IEMobile') !== -1 ||
+                     /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+          }
+          
+         
+          function openMobileSearchModal() {
+              if (isMobilePhone()) {
+                  mobileSearchModal.classList.add('active');
+                  mobileSearchInput.focus();
+             
+                  if (searchInput && searchInput.value) {
+                      mobileSearchInput.value = searchInput.value;
+                
+                      const inputEvent = new Event('input', { bubbles: true });
+                      mobileSearchInput.dispatchEvent(inputEvent);
+                  }
+              }
+          }
+          
+         
+          function closeMobileSearchModal() {
+              mobileSearchModal.classList.remove('active');
+          }
+          
+         
+          if (searchInput) {
+              searchInput.addEventListener('click', function(e) {
+                  if (isMobilePhone()) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      openMobileSearchModal();
+                  }
+              }, { capture: true });
+          }
+          
+          if (searchButton) {
+              searchButton.addEventListener('click', function(e) {
+                  if (isMobilePhone()) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      openMobileSearchModal();
+                  }
+              }, { capture: true });
+          }
+          
+         
+          if (mobileSearchClose) {
+              mobileSearchClose.addEventListener('click', closeMobileSearchModal);
+          }
+          
+          
+          if (mobileSearchForm) {
+              mobileSearchForm.addEventListener('submit', function(e) {
+                  e.preventDefault();
+                  const query = mobileSearchInput.value.trim();
+                  if (query) {
+                      window.location.href = `search-results.html?q=${encodeURIComponent(query)}`;
+                  }
+              });
+          }
+          
+          
+          if (mobileSearchInput) {
+              const API_URL = 'https://xf9zlapr5e.execute-api.af-south-1.amazonaws.com/search';
+              let debounceTimer;
+              
+              mobileSearchInput.addEventListener('input', function() {
+                  const query = this.value.trim();
+                  mobileSearchQuery.textContent = query || 'results';
+                  
+                  clearTimeout(debounceTimer);
+                  debounceTimer = setTimeout(async function() {
+                      if (query.length < 2) {
+                          mobileSuggestionsGrid.innerHTML = '';
+                          return;
+                      }
+                      
+                      try {
+                          const response = await fetch(`${API_URL}?q=${encodeURIComponent(query)}&limit=10`);
+                          if (!response.ok) throw new Error('API request failed');
+                          
+                          const data = await response.json();
+                          const suggestions = data.results || [];
+                          
+                          mobileSuggestionsGrid.innerHTML = '';
+                          
+                          if (suggestions.length === 0) {
+                              mobileSuggestionsGrid.innerHTML = '<div class="mobile-no-suggestions">No suggestions found</div>';
+                              return;
+                          }
+                          
+                          suggestions.forEach(item => {
+                              const isCategory = item.type === 'category';
+                              const suggestionElement = document.createElement('div');
+                              suggestionElement.className = `mobile-suggestion-item ${isCategory ? 'category' : 'product'}`;
+                              
+                              if (!isCategory) {
+                                  const productName = item.name || item.model || item.title || '';
+                                  suggestionElement.innerHTML = `
+                                      <a href="search-results.html?q=${encodeURIComponent(productName)}" class="mobile-suggestion-link">
+                                          <div class="mobile-suggestion-img">
+                                              <img src="${item.imageUrl || item.image || 'images/phones/Apple iPhone 16.webp'}" alt="${productName}">
+                                          </div>
+                                          <div class="mobile-suggestion-name">${productName}</div>
+                                      </a>
+                                  `;
+                              } else {
+                                  suggestionElement.innerHTML = `
+                                      <a href="${(item.category || item.name).toLowerCase()}.html" class="mobile-suggestion-link">
+                                          <div class="mobile-suggestion-icon">
+                                              <i class="fas fa-folder"></i>
+                                          </div>
+                                          <div class="mobile-suggestion-name">${item.name || ''}</div>
+                                      </a>
+                                  `;
+                              }
+                              
+                              mobileSuggestionsGrid.appendChild(suggestionElement);
+                          });
+                      } catch (error) {
+                          console.error('Error fetching suggestions:', error);
+                          mobileSuggestionsGrid.innerHTML = '<div class="mobile-no-suggestions">Error loading suggestions</div>';
+                      }
+                  }, 300); 
+              });
+          }
+      });
+    </script>
+
+  
+    <script src="sidebar.js"></script>
+    
+  
+    <script src="search-suggestions.js"></script>
+    
+  
+    <script src="wishlistmodal.js"></script>
+    
+    <div class="login-modal" id="loginModal">
+        <div class="login-modal-container">
+            <div class="login-modal-header">
+                <button class="login-modal-close" id="loginModalClose">&times;</button>
+                <div class="login-modal-logo-container">
+                    <img src="https://comparehub-smartphone-images.s3.af-south-1.amazonaws.com/IMG_20250625_174144.jpg" alt="Logo">
+                </div>
+            </div>
+            <div class="login-modal-form-container">
+                <div class="login-modal-form-header">
+                    <h2>Welcome Back</h2>
+                    <p>Please sign in to your account to continue</p>
+                </div>
+                
+                <div id="loginAlertContainer"></div>
+                <form class="login-modal-form" id="loginModalForm">
+                    <div class="login-modal-form-group">
+                        <label for="loginModalEmail">Email Address</label>
+                        <input type="email" id="loginModalEmail" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="login-modal-form-group">
+                        <label for="loginModalPassword">Password</label>
+                        <div class="login-modal-input-wrapper">
+                            <input type="password" id="loginModalPassword" name="password" placeholder="Enter your password" required>
+                            <button type="button" class="login-modal-password-toggle" id="loginModalPasswordToggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="login-modal-forgot-password">
+                        <a href="#" id="loginModalForgotPassword">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="login-modal-btn" id="loginModalBtn">
+                        <span id="loginModalBtnText">Sign In</span>
+                        <div class="login-modal-spinner" id="loginModalSpinner" style="display: none;"></div>
+                    </button>
+                </form>
+                <div class="login-modal-register-link">
+                    Don't have an account? <a href="#" id="loginModalRegisterLink">Sign up here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="register-modal" id="registerModal">
+        <div class="register-modal-container">
+            <div class="register-modal-header">
+                <button class="register-modal-close" id="registerModalClose">&times;</button>
+                <div class="register-modal-logo-container">
+                    <img src="https://comparehub-smartphone-images.s3.af-south-1.amazonaws.com/IMG_20250625_174144.jpg"
+                         alt="CompareHub Logo">
+                </div>
+            </div>
+            
+            <div class="register-modal-form-container">
+                <div class="register-modal-form-header">
+                    <h2>Create Account</h2>
+                    <p>Join thousands saving money with smart comparisons</p>
+                </div>
+                
+                <div id="registerAlertContainer"></div>
+                
+                <form id="registerModalForm" autocomplete="off">
+                    <div class="register-modal-form-group">
+                        <div class="register-modal-input-group">
+                            <input type="text" class="register-modal-input" id="registerFirstname" placeholder="First Name" required>
+                            <i class="fas fa-user register-modal-input-icon"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="register-modal-form-group">
+                        <div class="register-modal-input-group">
+                            <input type="text" class="register-modal-input" id="registerLastname" placeholder="Last Name" required>
+                            <i class="fas fa-user register-modal-input-icon"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="register-modal-form-group">
+                        <div class="register-modal-input-group">
+                            <input type="email" class="register-modal-input" id="registerEmail" placeholder="Email Address" required>
+                            <i class="fas fa-envelope register-modal-input-icon"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="register-modal-form-group">
+                        <div class="register-modal-input-group">
+                            <input type="password" class="register-modal-input" id="registerPassword" placeholder="Password" required>
+                            <button type="button" class="register-modal-password-toggle" onclick="toggleRegisterPassword('registerPassword')">
+                                <i class="fas fa-eye" id="registerPassword-eye"></i>
+                            </button>
+                        </div>
+                        <div class="register-modal-password-strength">
+                            <div class="register-modal-strength-title">Password Requirements</div>
+                            <div class="register-modal-strength-indicators">
+                                <div class="register-modal-strength-item" id="register-length-check">
+                                    <i class="fas fa-times"></i>
+                                    <span>8+ characters</span>
+                                </div>
+                                <div class="register-modal-strength-item" id="register-upper-check">
+                                    <i class="fas fa-times"></i>
+                                    <span>Uppercase letter</span>
+                                </div>
+                                <div class="register-modal-strength-item" id="register-number-check">
+                                    <i class="fas fa-times"></i>
+                                    <span>Number</span>
+                                </div>
+                                <div class="register-modal-strength-item" id="register-special-check">
+                                    <i class="fas fa-times"></i>
+                                    <span>Special character</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="register-modal-form-group">
+                        <div class="register-modal-input-group">
+                            <input type="password" class="register-modal-input" id="registerConfirmPassword" placeholder="Confirm Password" required>
+                            <button type="button" class="register-modal-password-toggle" onclick="toggleRegisterPassword('registerConfirmPassword')">
+                                <i class="fas fa-eye" id="registerConfirmPassword-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="register-modal-checkbox-group">
+                        <div class="register-modal-checkbox">
+                            <input type="checkbox" id="registerTerms" required style="position: absolute; opacity: 0; cursor: pointer; height: 100%; width: 100%; margin: 0; z-index: 1;">
+                            <div class="register-modal-checkmark"></div>
+                        </div>
+                        <label for="registerTerms" class="register-modal-checkbox-label" style="cursor: pointer;">
+                            I agree to the <a href="Terms-of-Service.html" target="_blank" style="pointer-events: auto;">Terms of Service</a> and <a href="privacy-policy.html" target="_blank" style="pointer-events: auto;">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="register-modal-btn" id="registerModalBtn">
+                        <i class="fas fa-user-plus"></i>
+                        <span id="registerModalBtnText">Create Account</span>
+                        <div class="register-modal-spinner" id="registerModalSpinner" style="display: none;"></div>
+                    </button>
+                </form>
+                
+                <div class="register-modal-divider">
+                    <span>Already have an account?</span>
+                </div>
+                
+                <div class="register-modal-login-link">
+                    <a href="#" id="registerModalLoginLink">
+                        <i class="fas fa-arrow-left"></i> Sign in instead
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="forgotPasswordModal" class="forgot-password-modal">
+        <div class="forgot-password-modal-container">
+            <div class="forgot-password-modal-header">
+                <button class="forgot-password-modal-close" onclick="closeForgotPasswordModal()">&times;</button>
+                <div class="forgot-password-modal-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+            </div>
+            <div class="forgot-password-modal-form-container">
+                <div class="forgot-password-modal-form-header">
+                    <h2>Reset Password</h2>
+                    <p>Enter your email address and we'll send you a code to reset your password.</p>
+                </div>
+                
+                <div id="forgotPasswordAlert" class="forgot-password-modal-alert" style="display: none;"></div>
+                
+                <form id="forgotPasswordForm">
+                    <div class="forgot-password-modal-form-group">
+                        <label for="forgotPasswordEmail">Email Address</label>
+                        <input
+                            type="email"
+                            id="forgotPasswordEmail"
+                            name="email"
+                            placeholder="Enter your email address"
+                            required
+                        >
+                    </div>
+                    
+                    <button type="submit" class="forgot-password-modal-btn" id="forgotPasswordBtn">
+                        <span id="forgotPasswordBtnText">Send Reset Code</span>
+                        <div id="forgotPasswordSpinner" class="forgot-password-modal-spinner" style="display: none;"></div>
+                    </button>
+
+    <script src="account-authentication.js"></script>
+                </form>
+                
+                <div class="forgot-password-modal-back-link">
+                    <a href="#" onclick="closeForgotPasswordModal(); showLoginModal();">Back to Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+</html>
