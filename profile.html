@@ -2036,24 +2036,27 @@
                                     <input type="password" id="newPassword" name="newPassword">
                                     <i class="fas fa-eye toggle-password" data-target="newPassword" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #777;"></i>
                                 </div>
-                                <div class="password-strength" id="passwordStrength" style="margin-top: 10px;">
-                                    <div class="strength-title" style="font-size: 14px; font-weight: 500; color: #333; margin-bottom: 8px;">Password Requirements</div>
-                                    <div class="strength-indicators" style="display: flex; flex-wrap: wrap; gap: 15px;">
-                                        <div class="strength-item" id="length-check" style="display: flex; align-items: center; font-size: 13px; color: #999;">
-                                            <i class="fas fa-times" style="margin-right: 6px; color: #f44336; width: 12px;"></i>
-                                            <span>8+ characters</span>
+                                <div class="password-strength" id="passwordStrength" style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; border: 1px solid #e9ecef;">
+                                    <div class="strength-title" style="font-size: 14px; font-weight: 600; color: #495057; margin-bottom: 12px; display: flex; align-items: center;">
+                                        <i class="fas fa-shield-alt" style="margin-right: 8px; color: #6c757d;"></i>
+                                        Password Requirements
+                                    </div>
+                                    <div class="strength-indicators" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;">
+                                        <div class="strength-item" id="length-check" style="display: flex; align-items: center; font-size: 12px; color: #6c757d; padding: 6px 10px; background: #fff; border-radius: 6px; border: 1px solid #dee2e6; transition: all 0.3s ease;">
+                                            <i class="fas fa-times" style="margin-right: 8px; color: #dc3545; width: 14px; font-size: 11px;"></i>
+                                            <span style="font-weight: 500;">8+ characters</span>
                                         </div>
-                                        <div class="strength-item" id="upper-check" style="display: flex; align-items: center; font-size: 13px; color: #999;">
-                                            <i class="fas fa-times" style="margin-right: 6px; color: #f44336; width: 12px;"></i>
-                                            <span>Uppercase letter</span>
+                                        <div class="strength-item" id="upper-check" style="display: flex; align-items: center; font-size: 12px; color: #6c757d; padding: 6px 10px; background: #fff; border-radius: 6px; border: 1px solid #dee2e6; transition: all 0.3s ease;">
+                                            <i class="fas fa-times" style="margin-right: 8px; color: #dc3545; width: 14px; font-size: 11px;"></i>
+                                            <span style="font-weight: 500;">Uppercase letter</span>
                                         </div>
-                                        <div class="strength-item" id="number-check" style="display: flex; align-items: center; font-size: 13px; color: #999;">
-                                            <i class="fas fa-times" style="margin-right: 6px; color: #f44336; width: 12px;"></i>
-                                            <span>Number</span>
+                                        <div class="strength-item" id="number-check" style="display: flex; align-items: center; font-size: 12px; color: #6c757d; padding: 6px 10px; background: #fff; border-radius: 6px; border: 1px solid #dee2e6; transition: all 0.3s ease;">
+                                            <i class="fas fa-times" style="margin-right: 8px; color: #dc3545; width: 14px; font-size: 11px;"></i>
+                                            <span style="font-weight: 500;">Number</span>
                                         </div>
-                                        <div class="strength-item" id="special-check" style="display: flex; align-items: center; font-size: 13px; color: #999;">
-                                            <i class="fas fa-times" style="margin-right: 6px; color: #f44336; width: 12px;"></i>
-                                            <span>Special character</span>
+                                        <div class="strength-item" id="special-check" style="display: flex; align-items: center; font-size: 12px; color: #6c757d; padding: 6px 10px; background: #fff; border-radius: 6px; border: 1px solid #dee2e6; transition: all 0.3s ease;">
+                                            <i class="fas fa-times" style="margin-right: 8px; color: #dc3545; width: 14px; font-size: 11px;"></i>
+                                            <span style="font-weight: 500;">Special character</span>
                                         </div>
                                     </div>
                                 </div>
@@ -2332,12 +2335,18 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (isValid) {
             icon.className = 'fas fa-check';
-            icon.style.color = '#4caf50';
-            text.style.color = '#4caf50';
+            icon.style.color = '#28a745';
+            text.style.color = '#28a745';
+            element.style.background = '#d4edda';
+            element.style.borderColor = '#c3e6cb';
+            element.style.transform = 'scale(1.02)';
         } else {
             icon.className = 'fas fa-times';
-            icon.style.color = '#f44336';
-            text.style.color = '#999';
+            icon.style.color = '#dc3545';
+            text.style.color = '#6c757d';
+            element.style.background = '#fff';
+            element.style.borderColor = '#dee2e6';
+            element.style.transform = 'scale(1)';
         }
     }
 
