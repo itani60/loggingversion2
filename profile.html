@@ -2770,6 +2770,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // =========================================================================
+    // COOKIE BANNER FUNCTIONS
+    // =========================================================================
+    
+    // Cookie Banner Functions
+    window.acceptCookies = function() {
+        const cookieBanner = document.getElementById('cookieBanner');
+        if (cookieBanner) {
+            cookieBanner.classList.remove('show');
+            localStorage.setItem('cookiesAccepted', 'true');
+            setTimeout(() => {
+                cookieBanner.style.display = 'none';
+            }, 400);
+        }
+    };
+
+    window.declineCookies = function() {
+        const cookieBanner = document.getElementById('cookieBanner');
+        if (cookieBanner) {
+            cookieBanner.classList.remove('show');
+            localStorage.setItem('cookiesAccepted', 'false');
+            setTimeout(() => {
+                cookieBanner.style.display = 'none';
+            }, 400);
+        }
+    };
+
+    // Show cookie banner on page load if not already accepted/declined
+    function showCookieBanner() {
+        const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+        if (cookiesAccepted === null) {
+            const cookieBanner = document.getElementById('cookieBanner');
+            if (cookieBanner) {
+                setTimeout(() => {
+                    cookieBanner.classList.add('show');
+                }, 1000); // Show after 1 second delay
+            }
+        }
+    }
+
+    // Initialize cookie banner
+    showCookieBanner();
+
+    // Newsletter subscription function
+    window.subscribeNewsletter = function(event) {
+        event.preventDefault();
+        const input = event.target.querySelector('input[type="email"]');
+        if (input && input.value) {
+            showNotification('Thank you for subscribing!', 'success', 'Newsletter');
+            input.value = '';
+        }
+    };
+
+    // =========================================================================
     // INITIALIZE THE PAGE
     // =========================================================================
     initializeProfilePage();
@@ -2979,6 +3032,20 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     </div>
 </div>
+
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-banner-content">
+            <div class="cookie-banner-text">
+                <i class="fas fa-cookie-bite"></i>
+                <span>This website uses cookies to provide you with the best experience. By continuing to use this site, you agree to our use of cookies.</span>
+            </div>
+            <div class="cookie-banner-actions">
+                <button class="cookie-banner-btn accept-btn" onclick="acceptCookies()">Accept</button>
+                <button class="cookie-banner-btn decline-btn" onclick="declineCookies()">Decline</button>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
