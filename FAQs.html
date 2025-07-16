@@ -1,0 +1,2452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions - CompareHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="wishlistmodal-mobile.css">
+    <style>
+        /* Main container styling */
+        .main-container {
+            padding-top: 120px; /* Accounts for header height */
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                padding-top: 110px; /* Adjust for smaller header on mobile */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-container {
+                padding-top: 100px; /* Further adjust for smaller screens */
+            }
+        }
+
+        /* FAQ Page Specific Styles */
+        .faq-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-hero {
+            background: linear-gradient(135deg, #05182d 0%, #ff0000 100%);
+            color: white;
+            padding: 80px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .faq-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        .faq-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .faq-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .faq-search {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 5px;
+        }
+
+        .faq-search input {
+            width: 100%;
+            padding: 20px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            background: transparent;
+            outline: none;
+            color: #333;
+        }
+
+        .faq-search input::placeholder {
+            color: #999;
+        }
+
+        .faq-search button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: linear-gradient(135deg, #05182d 0%, #ff0000 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .faq-search button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .faq-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .faq-category {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+        }
+
+        .faq-category:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .faq-category.active {
+            background: linear-gradient(135deg, #05182d 0%, #ff0000 100%);
+            color: white;
+            border-color: #05182d;
+        }
+
+        .faq-section {
+            margin-bottom: 50px;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #05182d 0%, #ff0000 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px 15px 0 0;
+            margin-bottom: 0;
+        }
+
+        .section-header h2 {
+            font-size: 28px;
+            margin: 0;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-header i {
+            font-size: 24px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: #05182d;
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8ecff 100%);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #333;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .faq-question:hover {
+            background: linear-gradient(135deg, #e8ecff 0%, #d4e0ff 100%);
+        }
+
+        .faq-question i {
+            transition: transform 0.3s ease;
+            color: #05182d;
+            font-size: 20px;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease;
+            background: white;
+        }
+
+        .faq-answer.active {
+            padding: 30px;
+            max-height: 1000px;
+            transition: max-height 0.6s ease-in, padding 0.4s ease;
+        }
+
+        .faq-answer p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .faq-answer ul, .faq-answer ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        .faq-answer li {
+            margin-bottom: 12px;
+            line-height: 1.8;
+            color: #555;
+            font-size: 16px;
+        }
+
+        .faq-answer a {
+            color: #05182d;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .faq-answer a:hover {
+            color: #ff0000;
+            text-decoration: underline;
+        }
+
+        .faq-contact {
+            text-align: center;
+            margin-top: 60px;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, #05182d 0%, #ff0000 100%);
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-contact h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .faq-contact p {
+            margin-bottom: 30px;
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .faq-contact-btn {
+            display: inline-block;
+            background: white;
+            color: #05182d;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .faq-contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            background: #f8f9ff;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #05182d 0%, #ff0000 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 3px solid white;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .faq-container {
+                padding: 20px 15px;
+                border-radius: 15px;
+            }
+            
+            .faq-hero {
+                padding: 50px 25px;
+                border-radius: 15px;
+                margin-bottom: 30px;
+            }
+            
+            .faq-hero h1 {
+                font-size: 32px;
+                margin-bottom: 15px;
+            }
+            
+            .faq-hero p {
+                font-size: 16px;
+            }
+            
+            .faq-search {
+                margin-bottom: 30px;
+                padding: 3px;
+            }
+            
+            .faq-search input {
+                padding: 15px 20px;
+                font-size: 14px;
+            }
+            
+            .faq-search button {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            
+            .faq-categories {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                margin-bottom: 30px;
+            }
+            
+            .faq-category {
+                padding: 12px 15px;
+                font-size: 14px;
+                border-radius: 12px;
+            }
+            
+            .section-header {
+                padding: 20px;
+                border-radius: 12px 12px 0 0;
+            }
+            
+            .section-header h2 {
+                font-size: 22px;
+                gap: 10px;
+            }
+            
+            .section-header i {
+                font-size: 20px;
+            }
+            
+            .faq-item {
+                border-radius: 12px;
+                margin-bottom: 15px;
+            }
+            
+            .faq-question {
+                padding: 18px 20px;
+                font-size: 16px;
+            }
+            
+            .faq-question i {
+                font-size: 18px;
+            }
+            
+            .faq-answer.active {
+                padding: 20px;
+            }
+            
+            .faq-answer p {
+                font-size: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .faq-answer li {
+                font-size: 15px;
+                margin-bottom: 10px;
+            }
+            
+            .faq-contact {
+                padding: 40px 25px;
+                margin-top: 40px;
+                border-radius: 15px;
+            }
+            
+            .faq-contact h3 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+            
+            .faq-contact p {
+                font-size: 16px;
+                margin-bottom: 25px;
+            }
+            
+            .faq-contact-btn {
+                padding: 12px 30px;
+                font-size: 15px;
+            }
+            
+            .back-to-top {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-container {
+                padding-top: 90px;
+            }
+            
+            .faq-container {
+                padding: 15px 10px;
+                border-radius: 10px;
+            }
+            
+            .faq-hero {
+                padding: 40px 20px;
+                border-radius: 10px;
+                margin-bottom: 25px;
+            }
+            
+            .faq-hero h1 {
+                font-size: 28px;
+                margin-bottom: 12px;
+            }
+            
+            .faq-hero p {
+                font-size: 15px;
+            }
+            
+            .faq-search {
+                margin-bottom: 25px;
+            }
+            
+            .faq-search input {
+                padding: 12px 18px;
+                font-size: 14px;
+            }
+            
+            .faq-search button {
+                padding: 10px 18px;
+                font-size: 13px;
+            }
+            
+            .faq-categories {
+                grid-template-columns: 1fr;
+                gap: 8px;
+                margin-bottom: 25px;
+            }
+            
+            .faq-category {
+                padding: 10px 15px;
+                font-size: 13px;
+                border-radius: 10px;
+            }
+            
+            .section-header {
+                padding: 18px;
+                border-radius: 10px 10px 0 0;
+            }
+            
+            .section-header h2 {
+                font-size: 20px;
+                gap: 8px;
+            }
+            
+            .section-header i {
+                font-size: 18px;
+            }
+            
+            .faq-item {
+                border-radius: 10px;
+                margin-bottom: 12px;
+            }
+            
+            .faq-question {
+                padding: 15px 18px;
+                font-size: 15px;
+            }
+            
+            .faq-question i {
+                font-size: 16px;
+            }
+            
+            .faq-answer.active {
+                padding: 18px;
+            }
+            
+            .faq-answer p {
+                font-size: 14px;
+                margin-bottom: 12px;
+            }
+            
+            .faq-answer li {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+            
+            .faq-contact {
+                padding: 30px 20px;
+                margin-top: 30px;
+                border-radius: 10px;
+            }
+            
+            .faq-contact h3 {
+                font-size: 22px;
+                margin-bottom: 12px;
+            }
+            
+            .faq-contact p {
+                font-size: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .faq-contact-btn {
+                padding: 10px 25px;
+                font-size: 14px;
+            }
+            
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 15px;
+                right: 15px;
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .faq-hero h1 {
+                font-size: 24px;
+            }
+            
+            .faq-hero p {
+                font-size: 14px;
+            }
+            
+            .section-header h2 {
+                font-size: 18px;
+            }
+            
+            .faq-question {
+                padding: 12px 15px;
+                font-size: 14px;
+            }
+            
+            .faq-answer.active {
+                padding: 15px;
+            }
+            
+            .faq-contact h3 {
+                font-size: 20px;
+            }
+            
+            .faq-contact p {
+                font-size: 14px;
+            }
+        }
+
+        /* Login Modal Styling - Based on login.html design */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            padding: 20px;
+        }
+
+        .login-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .login-modal-container {
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            overflow: hidden;
+            transform: translateY(30px) scale(0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            position: relative;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .login-modal.active .login-modal-container {
+            transform: translateY(0) scale(1);
+        }
+
+        .login-modal-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f80101, #ff5757);
+        }
+
+        .login-modal-header {
+            padding: 40px 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .login-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .login-modal-close:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .login-modal-logo-container {
+            width: 100%;
+            max-width: 300px;
+            height: 120px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .login-modal-logo-container img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            border-radius: 16px;
+        }
+
+        .login-modal-form-container {
+            padding: 40px;
+        }
+
+        .login-modal-form-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .login-modal-form-header h2 {
+            color: #333;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .login-modal-form-header p {
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .login-modal-form-group {
+            margin-bottom: 20px;
+            position: relative;
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .login-modal-form-group:nth-child(1) { animation-delay: 0.1s; }
+        .login-modal-form-group:nth-child(2) { animation-delay: 0.2s; }
+
+        .login-modal-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .login-modal-input-wrapper {
+            position: relative;
+        }
+
+        .login-modal-form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            outline: none;
+            font-weight: 400;
+            box-sizing: border-box;
+        }
+
+        .login-modal-form-group input::placeholder {
+            color: #666;
+            opacity: 0.7;
+        }
+
+        .login-modal-form-group input:focus {
+            border-color: #f80101;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(248, 1, 1, 0.1);
+        }
+
+        .login-modal-password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .login-modal-password-toggle:hover {
+            color: #f80101;
+            background: rgba(248, 1, 1, 0.1);
+        }
+
+        .login-modal-forgot-password {
+            text-align: right;
+            margin: -6px 0 20px;
+        }
+
+        .login-modal-forgot-password a {
+            color: #f80101;
+            font-size: 0.9rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .login-modal-forgot-password a:hover {
+            color: #d80000;
+            text-decoration: underline;
+        }
+
+        .login-modal-btn {
+            width: 100%;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #f80101, #d80000);
+            color: white;
+            border: none;
+            animation: fadeInUp 0.6s ease-out 0.6s both;
+        }
+
+        .login-modal-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .login-modal-btn:hover::before {
+            left: 100%;
+        }
+
+        .login-modal-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(248, 1, 1, 0.3);
+        }
+
+        .login-modal-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-modal-btn:disabled {
+            background: #666;
+            color: white;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-modal-register-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .login-modal-register-link a {
+            color: #f80101;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .login-modal-register-link a:hover {
+            color: #d80000;
+            text-decoration: underline;
+        }
+
+        .login-modal-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @media (max-width: 640px) {
+            .login-modal-container {
+                max-width: 350px;
+                margin: 0 15px;
+            }
+
+            .login-modal-header,
+            .login-modal-form-container {
+                padding: 20px;
+            }
+
+            .login-modal-form-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .login-modal-logo-container {
+                max-width: 200px;
+                height: 80px;
+                margin-bottom: 20px;
+            }
+
+            .login-modal-form-group {
+                margin-bottom: 16px;
+            }
+
+            .login-modal-form-group input {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+
+            .login-modal-btn {
+                padding: 12px 16px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-modal-container {
+                max-width: 320px;
+            }
+
+            .login-modal-header,
+            .login-modal-form-container {
+                padding: 16px;
+            }
+
+            .login-modal-form-header {
+                margin-bottom: 20px;
+            }
+
+            .login-modal-form-header h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+
+        /* Forgot Password Modal Styling */
+        .forgot-password-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            padding: 20px;
+        }
+
+        .forgot-password-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .forgot-password-modal-container {
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            overflow: hidden;
+            transform: translateY(30px) scale(0.9);
+            transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            position: relative;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .forgot-password-modal.active .forgot-password-modal-container {
+            transform: translateY(0) scale(1);
+        }
+
+        .forgot-password-modal-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #f80101, #ff5757);
+        }
+
+        .forgot-password-modal-header {
+            padding: 40px 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .forgot-password-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .forgot-password-modal-close:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .forgot-password-modal-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #f80101, #ff5757);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+        }
+
+        .forgot-password-modal-form-container {
+            padding: 40px;
+        }
+
+        .forgot-password-modal-form-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .forgot-password-modal-form-header h2 {
+            color: #333;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .forgot-password-modal-form-header p {
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .forgot-password-modal-form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .forgot-password-modal-form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .forgot-password-modal-form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: #fafafa;
+            transition: all 0.3s ease;
+            outline: none;
+            font-weight: 400;
+            box-sizing: border-box;
+        }
+
+        .forgot-password-modal-form-group input::placeholder {
+            color: #666;
+            opacity: 0.7;
+        }
+
+        .forgot-password-modal-form-group input:focus {
+            border-color: #f80101;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(248, 1, 1, 0.1);
+        }
+
+        .forgot-password-modal-btn {
+            width: 100%;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #f80101, #d80000);
+            color: white;
+            border: none;
+        }
+
+        .forgot-password-modal-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(248, 1, 1, 0.3);
+        }
+
+        .forgot-password-modal-btn:disabled {
+            background: #666;
+            color: white;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .forgot-password-modal-back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .forgot-password-modal-back-link a {
+            color: #f80101;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password-modal-back-link a:hover {
+            color: #d80000;
+            text-decoration: underline;
+        }
+
+        .forgot-password-modal-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #ffffff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .forgot-password-modal-alert {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password-modal-alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .forgot-password-modal-alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        /* Notification System Styling */
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .notification {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            margin-bottom: 16px;
+            overflow: hidden;
+            transform: translateX(100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 4px solid #4CAF50;
+            position: relative;
+            backdrop-filter: blur(10px);
+            animation: slideInRight 0.4s ease-out forwards;
+        }
+
+        .notification.error {
+            border-left-color: #f44336;
+        }
+
+        .notification.warning {
+            border-left-color: #ff9800;
+        }
+
+        .notification.info {
+            border-left-color: #2196F3;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px 12px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .notification-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notification-title i {
+            font-size: 18px;
+        }
+
+        .notification.success .notification-title i {
+            color: #4CAF50;
+        }
+
+        .notification.error .notification-title i {
+            color: #f44336;
+        }
+
+        .notification.warning .notification-title i {
+            color: #ff9800;
+        }
+
+        .notification.info .notification-title i {
+            color: #2196F3;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+        }
+
+        .notification-close:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .notification-body {
+            padding: 0 20px 16px;
+        }
+
+        .notification-message {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .notification-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            transition: width 0.1s linear;
+            border-radius: 0 0 12px 0;
+        }
+
+        .notification.error .notification-progress {
+            background: linear-gradient(90deg, #f44336, #d32f2f);
+        }
+
+        .notification.warning .notification-progress {
+            background: linear-gradient(90deg, #ff9800, #f57c00);
+        }
+
+        .notification.info .notification-progress {
+            background: linear-gradient(90deg, #2196F3, #1976D2);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        .notification.hiding {
+            animation: slideOutRight 0.3s ease-in forwards;
+        }
+
+        /* Mobile responsiveness for notifications */
+        @media (max-width: 768px) {
+            .notification-container {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+
+            .notification {
+                margin-bottom: 12px;
+            }
+
+            .notification-header {
+                padding: 14px 16px 10px;
+            }
+
+            .notification-title {
+                font-size: 15px;
+            }
+
+            .notification-body {
+                padding: 0 16px 14px;
+            }
+
+            .notification-message {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .notification-container {
+                top: 5px;
+                right: 5px;
+                left: 5px;
+            }
+
+            .notification-header {
+                padding: 12px 14px 8px;
+            }
+
+            .notification-title {
+                font-size: 14px;
+            }
+
+            .notification-body {
+                padding: 0 14px 12px;
+            }
+
+            .notification-message {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-top">
+            <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <img src="https://comparehub-smartphone-images.s3.af-south-1.amazonaws.com/IMG_20250625_174144.jpg" alt="CompareHubPrices" class="logo-image">
+                </a>
+            </div>
+            <div class="search-container">
+                <form id="search-form">
+                    <input type="text" name="q" class="search-input" placeholder="Search......." id="searchInput">
+                    <button type="submit" class="search-button" aria-label="Search"><i class="fas fa-search"></i></button>
+                </form>
+                <div class="search-suggestions" id="searchSuggestions">
+                    <div class="suggestions-header">
+                        <span class="all-results">All</span>
+                        <span class="search-query" id="searchQuery">results</span>
+                    </div>
+                    <div class="suggestions-grid" id="suggestionsGrid"></div>
+                </div>
+            </div>
+        </div>
+        <nav class="category-nav">
+            <a href="best-deals.html"><i class=""></i> Best deals</a>
+            <a href="#new-arrivals"><i class=""></i> New Arrivals</a>
+            <a href="#" id="wishlist-link"><i class="fas fa-heart"></i> Wishlist</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-login" id="sidebarLogin"></div>
+            <div class="sidebar-search">
+                <input type="text" placeholder="Search categories..." id="sidebarSearchInput">
+            </div>
+            <div class="sidebar-header">
+                <h3>Browse Categories</h3>
+                <button class="close-sidebar" onclick="closeSidebar()" aria-label="Close menu">&times;</button>
+            </div>
+              <div class="menu-content">
+                <ul class="menu-items">
+                    <li class="item">
+                        <div class="submenu-item" onclick="toggleSubmenu(this)">
+                            <span><i class=""></i> Cellphones & Tablets</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                        <ul class="menu-items submenu">
+                            <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Cellphones & Tablets</li>
+                            <li class="item"><a href="smartphones.html">Smartphones</a></li>
+                            <li class="item"><a href="#tablets">Tablets</a></li>
+                            <li class="item"><a href="#phone-accessories">Accessories</a></li>
+                        </ul>
+                    </li>
+
+                       <li class="item">
+                         <div class="submenu-item" onclick="toggleSubmenu(this)">
+                             <span><i class=""></i>Laptops</span>
+                             <i class="fa-solid fa-chevron-right"></i>
+                         </div>
+                         <ul class="menu-items submenu">
+                             <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Laptops & Accessories</li>
+                             <li class="item"><a href="#printers">Windows Laptops</a></li>
+                             <li class="item"><a href="#monitors">Chromebooks</a></li>
+                             <li class="item"><a href="#keyboards-mice">Macbooks</a></li>
+                             <li class="item"><a href="#storage-devices">Gaming Laptops</a></li>
+                             <li class="item"><a href="#computer-speakers">Accessories</a></li>
+                        
+                         </ul>
+                    </li>
+
+
+                    <li class="item">
+                         <div class="submenu-item" onclick="toggleSubmenu(this)">
+                             <span><i class=""></i> Computers & Accessories</span>
+                             <i class="fa-solid fa-chevron-right"></i>
+                         </div>
+                         <ul class="menu-items submenu">
+                             <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Computers & Accessories</li>
+                             <li class="item"><a href="#printers">Printers</a></li>
+                             <li class="item"><a href="#monitors">Monitors</a></li>
+                             <li class="item"><a href="#keyboards-mice">Keyboards & Mice</a></li>
+                             <li class="item"><a href="#storage-devices">Storage Devices</a></li>
+                             <li class="item"><a href="#computer-speakers">Computer Speakers</a></li>
+                             <li class="item"><a href="#webcams">Webcams</a></li>
+                         </ul>
+                    </li>
+                    <li class="item">
+                        <div class="submenu-item" onclick="toggleSubmenu(this)">
+                            <span><i class=""></i> TV & Streaming</span>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                        <ul class="menu-items submenu">
+                            <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> TV & Streaming</li>
+                            <li class="item"><a href="#televisions">Televisions</a></li>
+                            <li class="item"><a href="#streaming-devices">Streaming Devices</a></li>
+                            <li class="item"><a href="#tv-mounts">TV Mounts</a></li>
+                            <li class="item"><a href="#remote-controls">Remote Controls</a></li>
+                        </ul>
+                    </li>
+
+                       <li class="item">
+                         <div class="submenu-item" onclick="toggleSubmenu(this)">
+                             <span><i class=""></i>Audio</span>
+                             <i class="fa-solid fa-chevron-right"></i>
+                         </div>
+                         <ul class="menu-items submenu">
+                             <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Audio</li>
+                             <li class="item"><a href="#printers">Soundbars</a></li>
+                             <li class="item"><a href="#monitors">Earbuds</a></li>
+                             <li class="item"><a href="#keyboards-mice">Headphones</a></li>
+                             <li class="item"><a href="#storage-devices">Bluetooth Speakers</a></li>
+                             <li class="item"><a href="#computer-speakers">Home Audio Systems</a></li>
+                        
+                         </ul>
+                    </li>
+
+                         <li class="item">
+                         <div class="submenu-item" onclick="toggleSubmenu(this)">
+                             <span><i class=""></i>Wearables Devices</span>
+                             <i class="fa-solid fa-chevron-right"></i>
+                         </div>
+                         <ul class="menu-items submenu">
+                             <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Wearables Devices</li>
+                             <li class="item"><a href="#printers">Smartwatches</a></li>
+                             <li class="item"><a href="#monitors">Fitness Trackers</a></li>
+                             <li class="item"><a href="#keyboards-mice">VR Headsets</a></li>
+                            
+                         </ul>
+                    </li>
+
+
+                         <li class="item">
+                         <div class="submenu-item" onclick="toggleSubmenu(this)">
+                             <span><i class=""></i>Consoles</span>
+                             <i class="fa-solid fa-chevron-right"></i>
+                         </div>
+                         <ul class="menu-items submenu">
+                             <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Consoles</li>
+                             <li class="item"><a href="#printers">Consoles</a></li>
+                             <li class="item"><a href="#monitors">Console Accessories</a></li>
+                         </ul>
+                    </li>
+                       <li class="item">
+                         <div class="submenu-item" onclick="toggleSubmenu(this)">
+                             <span><i class=""></i> Appliances</span>
+                             <i class="fa-solid fa-chevron-right"></i>
+                         </div>
+                         <ul class="menu-items submenu">
+                             <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Appliances</li>
+                             <li class="item">
+                                 <div class="submenu-item" onclick="toggleSubmenu(this)">
+                                     <span>Kitchen Appliances</span>
+                                     <i class="fa-solid fa-chevron-right"></i>
+                                 </div>
+                                 <ul class="menu-items submenu">
+                                     <li class="menu-title" onclick="goBack(this)"><i class="fa-solid fa-chevron-left"></i> Kitchen Appliances</li>
+                                     <li class="item"><a href="#refrigerators">Refrigerators</a></li>
+                                     <li class="item"><a href="#microwaves">Microwaves</a></li>
+                                     <li class="item"><a href="#coffee-machines">Coffee Machines</a></li>
+                                     <li class="item"><a href="#blenders">Blenders</a></li>
+                                 </ul>
+                             </li>
+                             <li class="item"><a href="#vacuum-cleaners">Vacuum Cleaners</a></li>
+                             <li class="item"><a href="#air-conditioners">Air Conditioners</a></li>
+                         </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <div class="faq-container">
+                <div class="faq-hero">
+                    <h1><i class="fas fa-question-circle"></i> Frequently Asked Questions</h1>
+                    <p>Find answers to the most common questions about CompareHub and how to use our price comparison service.</p>
+                </div>
+
+                <div class="faq-search">
+                    <input type="text" placeholder="Search for questions..." id="faqSearchInput">
+                    <button type="button" id="faqSearchButton"><i class="fas fa-search"></i> Search</button>
+                </div>
+
+                <div class="faq-categories">
+                    <div class="faq-category active" data-category="all">All Questions</div>
+                    <div class="faq-category" data-category="general">General</div>
+                    <div class="faq-category" data-category="account">Account</div>
+                    <div class="faq-category" data-category="comparison">Price Comparison</div>
+                    <div class="faq-category" data-category="wishlist">Wishlist</div>
+                    <div class="faq-category" data-category="technical">Technical</div>
+                </div>
+
+                <div class="faq-section" id="general">
+                    <div class="section-header">
+                        <h2><i class="fas fa-info-circle"></i> General Questions</h2>
+                    </div>
+                    
+                    <div class="faq-item" data-category="general">
+                        <div class="faq-question">
+                            What is CompareHub? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>CompareHub is a price comparison platform that helps users find the best deals on electronics and tech products across South Africa. We aggregate prices from various retailers and present them in an easy-to-compare format, helping you make informed purchasing decisions.</p>
+                            <p>Our service is completely free to use, and we don't sell products directly. Instead, we connect you with the retailers offering the best prices on the products you're interested in.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="general">
+                        <div class="faq-question">
+                            Is CompareHub free to use? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, CompareHub is completely free for all users. There are no subscription fees or hidden costs for using our price comparison service.</p>
+                            <p>We are able to offer our service for free because we may earn a commission from retailers when you click through our site and make a purchase. This doesn't affect the price you pay, and it helps us continue to provide and improve our comparison service.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="general">
+                        <div class="faq-question">
+                            Which retailers do you compare? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We compare prices from major South African electronics and tech retailers. Our platform is currently being developed to include partnerships with various retailers.</p>
+                            <p>Coming soon - we are working on integrating with multiple retailers to provide you with the most comprehensive price comparison possible.</p>
+                            <p>Stay tuned for updates as we expand our retailer network to bring you the best deals from across South Africa.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="general">
+                        <div class="faq-question">
+                            Do you sell products directly? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No, CompareHub does not sell products directly. We are a price comparison service that helps you find the best deals across different retailers.</p>
+                            <p>When you find a product you want to purchase, we'll direct you to the retailer's website where you can complete your purchase directly with them. We don't process any transactions or handle any payments ourselves.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-section" id="account">
+                    <div class="section-header">
+                        <h2><i class="fas fa-user-circle"></i> Account Questions</h2>
+                    </div>
+                    
+                    <div class="faq-item" data-category="account">
+                        <div class="faq-question">
+                            Do I need to create an account to use CompareHub? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No, you don't need an account to use our basic price comparison features. You can search for products and compare prices without signing up.</p>
+                            <p>However, creating a free account gives you access to additional features such as:</p>
+                            <ul>
+                                <li>Saving products to your wishlist</li>
+                                <li>Setting up price drop alerts</li>
+                                <li>Viewing your comparison history</li>
+                                <li>Receiving personalized recommendations</li>
+                            </ul>
+                            <p>Creating an account is quick and easy - we only require your name and email address.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="account">
+                        <div class="faq-question">
+                            How do I create an account? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Creating an account on CompareHub is simple:</p>
+                            <ol>
+                                <li>Click on the "Sign Up" button in the top right corner of the page</li>
+                                <li>Enter your name and email address</li>
+                                <li>Create a password</li>
+                                <li>Click "Create Account"</li>
+                            </ol>
+                            <p>That's it! You'll receive a confirmation email to verify your account, and then you can start using all of our features.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="account">
+                        <div class="faq-question">
+                            How do I reset my password? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>If you've forgotten your password, you can reset it by following these steps:</p>
+                            <ol>
+                                <li>Click on the "Login" button in the top right corner of the page</li>
+                                <li>Click on "Forgot Password?" below the login form</li>
+                                <li>Enter the email address associated with your account</li>
+                                <li>Click "Reset Password"</li>
+                                <li>Check your email for a password reset link</li>
+                                <li>Click the link and follow the instructions to create a new password</li>
+                            </ol>
+                            <p>If you don't receive the password reset email within a few minutes, please check your spam folder or contact our support team for assistance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-section" id="comparison">
+                    <div class="section-header">
+                        <h2><i class="fas fa-chart-line"></i> Price Comparison Questions</h2>
+                    </div>
+                    
+                    <div class="faq-item" data-category="comparison">
+                        <div class="faq-question">
+                            How often are prices updated? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We update our prices multiple times daily to ensure you're seeing the most current information. Most product prices are refreshed at least once every 24 hours, with popular products being updated even more frequently.</p>
+                            <p>However, please note that prices can change rapidly at the retailers' websites. While we strive for accuracy, we always recommend confirming the final price on the retailer's website before making a purchase decision.</p>
+                            <p>Each product listing shows a "Last Updated" timestamp so you can see when the price was last checked.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="comparison">
+                        <div class="faq-question">
+                            How do you compare prices? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our price comparison system works by:</p>
+                            <ol>
+                                <li>Collecting product data and prices from various retailers through automated systems</li>
+                                <li>Matching identical products across different retailers</li>
+                                <li>Standardizing the information to make comparison easy</li>
+                                <li>Displaying the results in an easy-to-understand format</li>
+                            </ol>
+                            <p>We take into account the base price of the product as well as any current promotions or discounts being offered by the retailer. We also provide information about delivery costs where available, so you can compare the total cost of purchasing from different retailers.</p>
+                            <p>Our goal is to provide a comprehensive and transparent comparison that helps you find the best overall deal.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="comparison">
+                        <div class="faq-question">
+                            Can I set price alerts? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, registered users can set price alerts for specific products. When you set a price alert, we'll notify you by email when the price drops below your specified threshold.</p>
+                            <p>To set a price alert:</p>
+                            <ol>
+                                <li>Find the product you're interested in</li>
+                                <li>Click on the "Set Price Alert" button on the product page</li>
+                                <li>Enter your target price</li>
+                                <li>Click "Save Alert"</li>
+                            </ol>
+                            <p>You can manage all your price alerts from your account dashboard.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="comparison">
+                        <div class="faq-question">
+                            Why do prices sometimes differ from the retailer's website? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>While we strive to provide the most accurate and up-to-date pricing information, there are several reasons why you might occasionally see differences:</p>
+                            <ul>
+                                <li>Prices change frequently, and there might be a short delay in our updates</li>
+                                <li>Some retailers have dynamic pricing that changes based on various factors</li>
+                                <li>Special promotions or flash sales might start or end between our update cycles</li>
+                                <li>Regional pricing differences might apply in some cases</li>
+                            </ul>
+                            <p>We always recommend confirming the final price on the retailer's website before making a purchase decision. If you notice a significant price discrepancy, please let us know so we can investigate and update our system.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-section" id="wishlist">
+                    <div class="section-header">
+                        <h2><i class="fas fa-heart"></i> Wishlist Questions</h2>
+                    </div>
+                    
+                    <div class="faq-item" data-category="wishlist">
+                        <div class="faq-question">
+                            How do I add products to my wishlist? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>To add a product to your wishlist:</p>
+                            <ol>
+                                <li>Find the product you want to save</li>
+                                <li>Click on the heart icon next to the product</li>
+                                <li>The product will be instantly added to your wishlist</li>
+                            </ol>
+                            <p>You need to be logged in to use the wishlist feature. If you're not logged in, you'll be prompted to sign in or create an account when you click the heart icon.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="wishlist">
+                        <div class="faq-question">
+                            How do I view my wishlist? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>You can view your wishlist in two ways:</p>
+                            <ol>
+                                <li>Click on the heart icon in the top navigation bar to open a quick view of your wishlist</li>
+                                <li>Go to your account dashboard and select the "Wishlist" tab for a full view with more options</li>
+                            </ol>
+                            <p>From your wishlist, you can:</p>
+                            <ul>
+                                <li>See current prices across all retailers</li>
+                                <li>Track price changes over time</li>
+                                <li>Set price alerts</li>
+                                <li>Remove items from your wishlist</li>
+                                <li>Move items directly to a retailer's site for purchase</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="wishlist">
+                        <div class="faq-question">
+                            Is there a limit to how many products I can add to my wishlist? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>No, there is no limit to the number of products you can add to your wishlist. You can save as many products as you like for future reference or price tracking.</p>
+                            <p>However, for better organization, we recommend periodically reviewing your wishlist and removing items you're no longer interested in.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-section" id="technical">
+                    <div class="section-header">
+                        <h2><i class="fas fa-cogs"></i> Technical Questions</h2>
+                    </div>
+                    
+                    <div class="faq-item" data-category="technical">
+                        <div class="faq-question">
+                            Which browsers are supported? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>CompareHub is optimized for all modern browsers, including:</p>
+                            <ul>
+                                <li>Google Chrome (recommended)</li>
+                                <li>Mozilla Firefox</li>
+                                <li>Safari</li>
+                                <li>Microsoft Edge</li>
+                                <li>Opera</li>
+                            </ul>
+                            <p>For the best experience, we recommend using the latest version of your preferred browser. Some features may not work correctly on older browser versions, particularly Internet Explorer.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="technical">
+                        <div class="faq-question">
+                            Is CompareHub mobile-friendly? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, CompareHub is fully responsive and works well on all devices, including:</p>
+                            <ul>
+                                <li>Desktop computers</li>
+                                <li>Laptops</li>
+                                <li>Tablets</li>
+                                <li>Smartphones</li>
+                            </ul>
+                            <p>Our website automatically adjusts to provide the best experience based on your screen size. All features are available on mobile devices, allowing you to compare prices on the go.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item" data-category="technical">
+                        <div class="faq-question">
+                            What should I do if I encounter a technical issue? <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>If you encounter any technical issues while using CompareHub, please try these steps first:</p>
+                            <ol>
+                                <li>Refresh the page</li>
+                                <li>Clear your browser cache and cookies</li>
+                                <li>Try using a different browser</li>
+                                <li>Check your internet connection</li>
+                            </ol>
+                            <p>If the issue persists, please contact our support team with the following information:</p>
+                            <ul>
+                                <li>A description of the issue</li>
+                                <li>The device and browser you're using</li>
+                                <li>Steps to reproduce the issue</li>
+                                <li>Screenshots if possible</li>
+                            </ul>
+                            <p>You can reach our support team at <a href="mailto:support@comparehub.co.za">support@comparehub.co.za</a>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-contact">
+                    <h3><i class="fas fa-headset"></i> Didn't Find Your Answer?</h3>
+                    <p>If you couldn't find the information you were looking for, our support team is here to help.</p>
+                    <a href="mailto:support@comparehub.co.za" class="faq-contact-btn">
+                        <i class="fas fa-envelope"></i> Contact Support
+                    </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    
+    <!-- Notification Container -->
+    <div class="notification-container" id="notificationContainer"></div>
+    
+    <!-- Wishlist Modal -->
+    <div id="wishlist-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-actions">
+                    <a href="profile.html#wishlist" class="view-all-btn">View All</a>
+                    <button class="remove-all-btn" id="clear-wishlist-btn">Remove All</button>
+                    <span class="wishlist-close-modal" id="close-wishlist-modal">&times;</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div id="wishlist-items" class="wishlist-grid">
+                    <!-- Wishlist items will be populated here -->
+                </div>
+                <div id="modal-empty-wishlist" class="empty-wishlist" style="display: none;">
+                    <i class="far fa-heart"></i>
+                    <p>Your wishlist is empty</p>
+                    <p class="empty-wishlist-subtext">Add items to your wishlist by clicking the heart icon on products</p>
+                    <a href="smartphones.html" class="browse-products-btn">Browse Products</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Search Modal -->
+    <div class="mobile-search-modal" id="mobileSearchModal">
+        <div class="mobile-search-modal-header">
+            <span class="mobile-search-close" id="mobileSearchClose">&times;</span>
+            <form class="mobile-search-form" id="mobileSearchForm">
+                <input type="text" class="mobile-search-input" id="mobileSearchInput" placeholder="Search...">
+                <button type="submit" class="mobile-search-button"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+        <div class="mobile-search-suggestions" id="mobileSearchSuggestions">
+            <div class="mobile-suggestions-header">
+                <span class="mobile-all-results">All</span>
+                <span class="mobile-search-query" id="mobileSearchQuery">results</span>
+            </div>
+            <div class="mobile-suggestions-grid" id="mobileSuggestionsGrid"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About CompareHubPrices</h3>
+                <ul>
+                    <li><a href="about-us.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Help & Support</h3>
+                <ul>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#faq" class="active">FAQs</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="Terms-of-Service.html">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="newsletter-section">
+                    <h4>Get the Best Deals in Your Inbox</h4>
+                    <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                        <input type="email" placeholder="Enter your email address" required aria-label="Email address for newsletter">
+                        <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CompareHub Prices. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function adjustContentPadding() {
+            const header = document.querySelector('.header');
+            const mainContainer = document.querySelector('.main-container');
+            const headerHeight = header.offsetHeight;
+            mainContainer.style.paddingTop = `${headerHeight}px`;
+        }
+
+        window.addEventListener('load', adjustContentPadding);
+        window.addEventListener('resize', adjustContentPadding);
+        
+        // FAQ Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle FAQ answers
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const answer = this.nextElementSibling;
+                    answer.classList.toggle('active');
+                });
+            });
+
+            // Category filtering
+            const categoryButtons = document.querySelectorAll('.faq-category');
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    // Show/hide FAQ items based on category
+                    faqItems.forEach(item => {
+                        if (category === 'all' || item.getAttribute('data-category') === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // FAQ Search functionality
+            const searchInput = document.getElementById('faqSearchInput');
+            const searchButton = document.getElementById('faqSearchButton');
+            
+            function searchFAQs() {
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                if (searchTerm.length < 2) {
+                    // Reset to show all if search term is too short
+                    faqItems.forEach(item => {
+                        item.style.display = 'block';
+                    });
+                    return;
+                }
+                
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+                
+                // Reset category buttons
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector('[data-category="all"]').classList.add('active');
+            }
+            
+            searchButton.addEventListener('click', searchFAQs);
+            searchInput.addEventListener('keyup', function(event) {
+                if (event.key === 'Enter') {
+                    searchFAQs();
+                }
+            });
+
+            // Back to top functionality
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.style.display = 'flex';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+
+    <!-- Sidebar functionality -->
+    <script src="sidebar.js"></script>
+    
+    <!-- Search suggestions functionality -->
+    <script src="search-suggestions.js"></script>
+    
+    <!-- Wishlist modal functionality -->
+    <script src="wishlistmodal.js"></script>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-modal-container">
+            <div class="login-modal-header">
+                <button class="login-modal-close" id="loginModalClose">&times;</button>
+                <div class="login-modal-logo-container">
+                    <img src="https://comparehub-smartphone-images.s3.af-south-1.amazonaws.com/IMG_20250625_174144.jpg" alt="Logo">
+                </div>
+            </div>
+            <div class="login-modal-form-container">
+                <div class="login-modal-form-header">
+                    <h2>Welcome Back</h2>
+                    <p>Please sign in to your account to continue</p>
+                </div>
+                
+                <div id="loginAlertContainer"></div>
+                <form class="login-modal-form" id="loginModalForm">
+                    <div class="login-modal-form-group">
+                        <label for="loginModalEmail">Email Address</label>
+                        <input type="email" id="loginModalEmail" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="login-modal-form-group">
+                        <label for="loginModalPassword">Password</label>
+                        <div class="login-modal-input-wrapper">
+                            <input type="password" id="loginModalPassword" name="password" placeholder="Enter your password" required>
+                            <button type="button" class="login-modal-password-toggle" id="loginModalPasswordToggle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="login-modal-forgot-password">
+                        <a href="#" id="loginModalForgotPassword">Forgot Password?</a>
+                    </div>
+                    <button type="submit" class="login-modal-btn" id="loginModalBtn">
+                        <span id="loginModalBtnText">Sign In</span>
+                        <div class="login-modal-spinner" id="loginModalSpinner" style="display: none;"></div>
+                    </button>
+                </form>
+                <div class="login-modal-register-link">
+                    Don't have an account? <a href="#" id="loginModalRegisterLink">Sign up here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="register-modal" id="registerModal">
+        <div class="register-modal-container">
+            <div class="register-modal-header">
+                <button class="register-modal-close" id="registerModalClose">&times;</button>
+                <div class="register-modal-logo-container">
+                    <img src="https://comparehub-smartphone-images.s3.af-south-1.amazonaws.com/IMG_20250625_174144.jpg"
+                         alt="CompareHub Logo">
+                </div>
+            </div>
+            
+            <div class="register-modal-form-container">
+                <div class="register-modal-form-header">
+                    <h2>Create Account</h2>
+                    <p>Join thousands saving money with smart comparisons</p>
+                </div>
+                
+                <div id="registerAlertContainer"></div>
+                
+                <form id="registerModalForm" autocomplete="off">
+                    <div class="register-modal-form-group">
+                        <div class="register-modal-input-group">
+                            <input type="text" class="register-modal-input" id="registerFirstname" placeholder="First Name" required>
+                            <i class="fas fa-user register-modal-input-icon"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="register-modal-form-group">
+                        <div class="register-modal-input-group">
+                            <input type="text" class="register-modal-input" id="registerLastname" placeholder="Last Name" required>
+                            <i class="fas fa-user register-modal-input-icon"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="register-modal-form-group">
+                        <div class="register-modal-input-group">
+                            <input type="email" class="register-modal-input" id="registerEmail" placeholder="Email Address" required>
+                            <i class="fas fa-envelope register-modal-input-icon"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="register-modal-form-group">
+                        <div class="register-modal-input-group">
+                            <input type="password" class="register-modal-input" id="registerPassword" placeholder="Password" required>
+                            <button type="button" class="register-modal-password-toggle" onclick="toggleRegisterPassword('registerPassword')">
+                                <i class="fas fa-eye" id="registerPassword-eye"></i>
+                            </button>
+                        </div>
+                        <div class="register-modal-password-strength">
+                            <div class="register-modal-strength-title">Password Requirements</div>
+                            <div class="register-modal-strength-indicators">
+                                <div class="register-modal-strength-item" id="register-length-check">
+                                    <i class="fas fa-times"></i>
+                                    <span>8+ characters</span>
+                                </div>
+                                <div class="register-modal-strength-item" id="register-upper-check">
+                                    <i class="fas fa-times"></i>
+                                    <span>Uppercase letter</span>
+                                </div>
+                                <div class="register-modal-strength-item" id="register-number-check">
+                                    <i class="fas fa-times"></i>
+                                    <span>Number</span>
+                                </div>
+                                <div class="register-modal-strength-item" id="register-special-check">
+                                    <i class="fas fa-times"></i>
+                                    <span>Special character</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="register-modal-form-group">
+                        <div class="register-modal-input-group">
+                            <input type="password" class="register-modal-input" id="registerConfirmPassword" placeholder="Confirm Password" required>
+                            <button type="button" class="register-modal-password-toggle" onclick="toggleRegisterPassword('registerConfirmPassword')">
+                                <i class="fas fa-eye" id="registerConfirmPassword-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="register-modal-checkbox-group">
+                        <div class="register-modal-checkbox">
+                            <input type="checkbox" id="registerTerms" required style="position: absolute; opacity: 0; cursor: pointer; height: 100%; width: 100%; margin: 0; z-index: 1;">
+                            <div class="register-modal-checkmark"></div>
+                        </div>
+                        <label for="registerTerms" class="register-modal-checkbox-label" style="cursor: pointer;">
+                            I agree to the <a href="Terms-of-Service.html" target="_blank" style="pointer-events: auto;">Terms of Service</a> and <a href="privacy-policy.html" target="_blank" style="pointer-events: auto;">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="register-modal-btn" id="registerModalBtn">
+                        <i class="fas fa-user-plus"></i>
+                        <span id="registerModalBtnText">Create Account</span>
+                        <div class="register-modal-spinner" id="registerModalSpinner" style="display: none;"></div>
+                    </button>
+                </form>
+                
+                <div class="register-modal-divider">
+                    <span>Already have an account?</span>
+                </div>
+                
+                <div class="register-modal-login-link">
+                    <a href="#" id="registerModalLoginLink">
+                        <i class="fas fa-arrow-left"></i> Sign in instead
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="forgot-password-modal">
+        <div class="forgot-password-modal-container">
+            <div class="forgot-password-modal-header">
+                <button class="forgot-password-modal-close" onclick="closeForgotPasswordModal()">&times;</button>
+                <div class="forgot-password-modal-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+            </div>
+            <div class="forgot-password-modal-form-container">
+                <div class="forgot-password-modal-form-header">
+                    <h2>Reset Password</h2>
+                    <p>Enter your email address and we'll send you a code to reset your password.</p>
+                </div>
+                
+                <div id="forgotPasswordAlert" class="forgot-password-modal-alert" style="display: none;"></div>
+                
+                <form id="forgotPasswordForm">
+                    <div class="forgot-password-modal-form-group">
+                        <label for="forgotPasswordEmail">Email Address</label>
+                        <input
+                            type="email"
+                            id="forgotPasswordEmail"
+                            name="email"
+                            placeholder="Enter your email address"
+                            required
+                        >
+                    </div>
+                    
+                    <button type="submit" class="forgot-password-modal-btn" id="forgotPasswordBtn">
+                        <span id="forgotPasswordBtnText">Send Reset Code</span>
+                        <div id="forgotPasswordSpinner" class="forgot-password-modal-spinner" style="display: none;"></div>
+                    </button>
+                </form>
+                
+                <div class="forgot-password-modal-back-link">
+                    <a href="#" onclick="closeForgotPasswordModal(); showLoginModal();">Back to Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account authentication functionality -->
+    <script src="account-authentication.js"></script>
+
+    <script>
+        // Notification System Functions
+        function showNotification(message, type = 'success', title = null) {
+            const container = document.getElementById('notificationContainer');
+            if (!container) return;
+
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            // Set default titles based on type
+            if (!title) {
+                switch(type) {
+                    case 'success': title = 'Success'; break;
+                    case 'error': title = 'Error'; break;
+                    case 'warning': title = 'Warning'; break;
+                    case 'info': title = 'Info'; break;
+                    default: title = 'Notification';
+                }
+            }
+
+            // Set icon based on type
+            let icon;
+            switch(type) {
+                case 'success': icon = 'fas fa-check-circle'; break;
+                case 'error': icon = 'fas fa-exclamation-circle'; break;
+                case 'warning': icon = 'fas fa-exclamation-triangle'; break;
+                case 'info': icon = 'fas fa-info-circle'; break;
+                default: icon = 'fas fa-bell';
+            }
+
+            notification.innerHTML = `
+                <div class="notification-header">
+                    <div class="notification-title">
+                        <i class="${icon}"></i>
+                        ${title}
+                    </div>
+                    <button class="notification-close" onclick="closeNotification(this)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="notification-body">
+                    <p class="notification-message">${message}</p>
+                </div>
+                <div class="notification-progress"></div>
+            `;
+
+            // Add to container
+            container.appendChild(notification);
+
+            // Trigger show animation
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+
+            // Auto-hide after 5 seconds (except for errors)
+            if (type !== 'error') {
+                const duration = 5000;
+                const progressBar = notification.querySelector('.notification-progress');
+                let width = 100;
+                const interval = setInterval(() => {
+                    width -= 100 / (duration / 100);
+                    progressBar.style.width = width + '%';
+                    if (width <= 0) {
+                        clearInterval(interval);
+                        closeNotification(notification.querySelector('.notification-close'));
+                    }
+                }, 100);
+            }
+        }
+
+        function closeNotification(button) {
+            const notification = button.closest('.notification');
+            notification.classList.add('hiding');
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }
+
+        // Session Management Functions
+        function handleLogout() {
+            sessionStorage.clear();
+            localStorage.removeItem('userToken');
+            window.location.href = 'index.html';
+        }
+
+        // Session validation and expiration handling
+        function validateSession() {
+            const token = sessionStorage.getItem('userToken') || localStorage.getItem('userToken');
+            if (token) {
+                try {
+                    // Simulate token validation - replace with actual API call
+                    const tokenData = JSON.parse(atob(token.split('.')[1]));
+                    const currentTime = Date.now() / 1000;
+                    
+                    if (tokenData.exp && tokenData.exp < currentTime) {
+                        throw new Error('Session Expired');
+                    }
+                } catch (error) {
+                    showNotification(error.message, 'error', 'Session Expired');
+                    setTimeout(handleLogout, 2000);
+                }
+            }
+        }
+
+        // Initialize session validation on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            validateSession();
+            
+            // Check session every 5 minutes
+            setInterval(validateSession, 5 * 60 * 1000);
+        });
+    </script>
+</body>
+</html>

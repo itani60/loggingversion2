@@ -3,71 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - CompareHubPrices</title>
+    <title>About Us - CompareHub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="wishlistmodal-mobile.css">
     <style>
-       
+        /* Main container styling */
         .main-container {
-            padding-top: 120px; 
+            padding-top: 120px;
         }
         
         @media (max-width: 768px) {
             .main-container {
-                padding-top: 110px; 
+                padding-top: 110px;
             }
         }
         
         @media (max-width: 480px) {
             .main-container {
-                padding-top: 100px; 
+                padding-top: 100px;
             }
         }
 
-      
-        .about-us-container {
+        /* About Us Page Specific Styles */
+        .about-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 40px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
         }
 
-        .about-us-header {
+        .about-hero {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #05182d 0%, #ff0000 100%);
+            color: white;
+            padding: 80px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .about-us-header h1 {
-            font-size: 36px;
-            color: #333;
-            margin-bottom: 15px;
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
         }
 
-        .about-us-header p {
-            font-size: 18px;
-            color: #666;
-            max-width: 800px;
+        .about-hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
+            position: relative;
+            z-index: 1;
         }
 
-        .about-us-section {
-            margin-bottom: 60px;
+        .about-navigation {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #05182d;
         }
 
-        .about-us-section h2 {
-            font-size: 28px;
-            color: #4285f4;
+        .about-navigation h3 {
+            font-size: 24px;
+            color: #333;
             margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .about-us-section p {
+        .about-navigation h3 i {
+            color: #05182d;
+        }
+
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: #05182d;
+            color: white;
+            transform: translateX(5px);
+            border-left-color: #ff0000;
+        }
+
+        .nav-item i {
+            margin-right: 12px;
+            font-size: 18px;
+            width: 20px;
+        }
+
+        .about-section {
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #05182d 0%, #ff0000 100%);
+            color: white;
+            padding: 25px 30px;
+            position: relative;
+        }
+
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #f093fb 0%, #f5576c 50%, #4facfe 100%);
+        }
+
+        .section-header h2 {
+            font-size: 28px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-header i {
+            font-size: 32px;
+            opacity: 0.9;
+        }
+
+        .section-content {
+            padding: 30px;
+        }
+
+        .section-content p {
             font-size: 16px;
             line-height: 1.8;
             color: #555;
             margin-bottom: 20px;
+        }
+
+        .section-content ul, .section-content ol {
+            margin: 20px 0;
+            padding-left: 0;
+        }
+
+        .section-content li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .section-content ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #05182d;
+            font-weight: bold;
+            font-size: 18px;
         }
 
         .mission-vision-container {
@@ -80,262 +217,250 @@
         .mission-box, .vision-box {
             flex: 1;
             min-width: 300px;
-            background-color: #f9f9f9;
-            border-radius: 10px;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #05182d;
+            position: relative;
         }
 
         .mission-box:hover, .vision-box:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
         .mission-box h3, .vision-box h3 {
-            font-size: 22px;
+            font-size: 24px;
             color: #333;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
+            gap: 15px;
         }
 
         .mission-box h3 i, .vision-box h3 i {
-            color: #4285f4;
-            margin-right: 10px;
-            font-size: 24px;
+            color: #05182d;
+            font-size: 28px;
         }
 
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .team-member {
-            background-color: #fff;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .team-member:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .team-member-image {
-            height: 250px;
-            overflow: hidden;
-        }
-
-        .team-member-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .team-member:hover .team-member-image img {
-            transform: scale(1.05);
-        }
-
-        .team-member-info {
-            padding: 20px;
-        }
-
-        .team-member-name {
-            font-size: 20px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
-
-        .team-member-position {
+        .mission-box p, .vision-box p {
             font-size: 16px;
-            color: #4285f4;
-            margin-bottom: 15px;
-        }
-
-        .team-member-bio {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .team-member-social {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .team-member-social a {
-            color: #777;
-            font-size: 18px;
-            transition: color 0.2s ease;
-        }
-
-        .team-member-social a:hover {
-            color: #4285f4;
+            line-height: 1.8;
+            color: #555;
+            margin: 0;
         }
 
         .values-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             margin-top: 30px;
         }
 
         .value-card {
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-top: 4px solid #4285f4;
+            border-top: 5px solid #05182d;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #05182d 0%, #ff0000 50%, #f093fb 100%);
         }
 
         .value-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
 
         .value-card-icon {
-            font-size: 36px;
-            color: #4285f4;
-            margin-bottom: 15px;
+            font-size: 40px;
+            color: #05182d;
+            margin-bottom: 20px;
+            display: block;
         }
 
         .value-card-title {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 600;
             color: #333;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .value-card-description {
-            font-size: 15px;
-            color: #666;
-            line-height: 1.6;
+            font-size: 16px;
+            color: #555;
+            line-height: 1.8;
         }
 
-        .timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 40px auto 0;
-            padding: 20px 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            width: 3px;
-            background-color: #e0e0e0;
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 50px;
-            display: flex;
-        }
-
-        .timeline-item:nth-child(odd) {
-            flex-direction: row-reverse;
-        }
-
-        .timeline-content {
-            width: calc(50% - 30px);
-            padding: 20px;
-            background-color: #fff;
+        .highlight-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 5px solid #ff6b6b;
             position: relative;
         }
 
-        .timeline-content::before {
-            content: '';
+        .highlight-box::before {
+            content: '⭐';
             position: absolute;
-            top: 20px;
-            width: 20px;
-            height: 20px;
-            background-color: #fff;
-            transform: rotate(45deg);
+            top: -10px;
+            left: 20px;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 16px;
         }
 
-        .timeline-item:nth-child(odd) .timeline-content::before {
-            left: -10px;
+        .highlight-box p {
+            margin: 0;
+            font-weight: 600;
+            color: #d63031;
         }
 
-        .timeline-item:nth-child(even) .timeline-content::before {
-            right: -10px;
+        .info-box {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 5px solid #00b894;
+            position: relative;
         }
 
-        .timeline-date {
+        .info-box::before {
+            content: 'ℹ️';
             position: absolute;
-            top: 20px;
+            top: -10px;
+            left: 20px;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 16px;
+        }
+
+        .info-box p {
+            margin: 0;
+            font-weight: 500;
+            color: #00b894;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #05182d 0%, #ff0000 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .contact-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-item i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .contact-item h4 {
+            margin: 10px 0 5px;
+            font-size: 18px;
+        }
+
+        .contact-item p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
             width: 60px;
             height: 60px;
-            background-color: #4285f4;
+            background: linear-gradient(135deg, #05182d 0%, #ff0000 100%);
+            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            font-weight: bold;
-            z-index: 1;
+            font-size: 24px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
         }
 
-        .timeline-item:nth-child(odd) .timeline-date {
-            left: calc(50% - 30px);
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .timeline-item:nth-child(even) .timeline-date {
-            right: calc(50% - 30px);
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
         }
 
-        .timeline-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .timeline-description {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.6;
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
         }
 
         @media (max-width: 768px) {
-            .timeline::before {
-                left: 30px;
+            .about-hero {
+                padding: 60px 20px;
             }
 
-            .timeline-item {
-                flex-direction: row !important;
+            .about-hero h1 {
+                font-size: 36px;
             }
 
-            .timeline-content {
-                width: calc(100% - 80px);
-                margin-left: 80px;
+            .about-hero p {
+                font-size: 18px;
             }
 
-            .timeline-item:nth-child(odd) .timeline-content::before,
-            .timeline-item:nth-child(even) .timeline-content::before {
-                left: -10px;
-                right: auto;
+            .nav-grid {
+                grid-template-columns: 1fr;
             }
 
-            .timeline-item:nth-child(odd) .timeline-date,
-            .timeline-item:nth-child(even) .timeline-date {
-                left: 0;
-                right: auto;
+            .section-header h2 {
+                font-size: 24px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
             }
 
             .mission-vision-container {
@@ -343,71 +468,23 @@
             }
         }
 
-        /* Contact section */
-        .contact-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 30px;
-        }
+        @media (max-width: 480px) {
+            .about-container {
+                padding: 20px 10px;
+            }
 
-        .contact-card {
-            flex: 1;
-            min-width: 250px;
-            background-color: #fff;
-            border-radius: 10px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
+            .about-hero {
+                padding: 40px 15px;
+            }
 
-        .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
+            .about-hero h1 {
+                font-size: 28px;
+            }
 
-        .contact-icon {
-            width: 60px;
-            height: 60px;
-            background-color: #f0f7ff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-
-        .contact-icon i {
-            font-size: 24px;
-            color: #4285f4;
-        }
-
-        .contact-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .contact-details {
-            font-size: 15px;
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .contact-details a {
-            color: #4285f4;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .contact-details a:hover {
-            color: #2b68ca;
-            text-decoration: underline;
+            .about-navigation,
+            .section-content {
+                padding: 20px;
+            }
         }
 
         /* Login Modal Styling - Based on login.html design */
@@ -787,6 +864,200 @@
             }
         }
 
+        /* Notification System Styles */
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            max-width: 400px;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .notification {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            margin-bottom: 16px;
+            padding: 20px;
+            transform: translateX(100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: auto;
+            border-left: 4px solid #4CAF50;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .notification::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            pointer-events: none;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left-color: #4CAF50;
+        }
+
+        .notification.error {
+            border-left-color: #f44336;
+        }
+
+        .notification.warning {
+            border-left-color: #ff9800;
+        }
+
+        .notification.info {
+            border-left-color: #2196F3;
+        }
+
+        .notification-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            font-size: 16px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notification-title i {
+            font-size: 18px;
+        }
+
+        .notification.success .notification-title i {
+            color: #4CAF50;
+        }
+
+        .notification.error .notification-title i {
+            color: #f44336;
+        }
+
+        .notification.warning .notification-title i {
+            color: #ff9800;
+        }
+
+        .notification.info .notification-title i {
+            color: #2196F3;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #666;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            line-height: 1;
+        }
+
+        .notification-close:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .notification-message {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .notification-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 12px 12px;
+            overflow: hidden;
+        }
+
+        .notification-progress-bar {
+            height: 100%;
+            width: 100%;
+            transform: translateX(-100%);
+            transition: transform linear;
+        }
+
+        .notification.success .notification-progress-bar {
+            background: #4CAF50;
+        }
+
+        .notification.error .notification-progress-bar {
+            background: #f44336;
+        }
+
+        .notification.warning .notification-progress-bar {
+            background: #ff9800;
+        }
+
+        .notification.info .notification-progress-bar {
+            background: #2196F3;
+        }
+
+        @media (max-width: 768px) {
+            .notification-container {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+
+            .notification {
+                padding: 16px;
+                margin-bottom: 12px;
+            }
+
+            .notification-title {
+                font-size: 15px;
+            }
+
+            .notification-message {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .notification-container {
+                top: 5px;
+                right: 5px;
+                left: 5px;
+            }
+
+            .notification {
+                padding: 14px;
+                margin-bottom: 10px;
+            }
+
+            .notification-title {
+                font-size: 14px;
+            }
+
+            .notification-message {
+                font-size: 12px;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -961,89 +1232,150 @@
         </nav>
         
         <main class="content">
-            <div class="about-us-container">
-                <div class="about-us-header">
+            <div class="about-container">
+                <div class="about-hero">
                     <h1>About CompareHub</h1>
                     <p>Your trusted destination for comparing prices and finding the best deals on electronics and tech products across South Africa.</p>
                 </div>
 
-                <div class="about-us-section">
-                    <h2>Our Story</h2>
-                    <p>Our story started this year with a clear vision: to create a comprehensive platform that compares different products from different retailers, showing price comparisons from different stores along with detailed specifications.</p>
-                    <p>Our main goal was to provide users with essential features including wishlist functionality and drop price alerts, making it easier for consumers to track their favorite products and get notified when prices drop.</p>
-                    <p>We believe that shopping for technology should be straightforward and transparent. By aggregating prices from trusted retailers across South Africa, we empower you to find the best deals without the hassle of visiting multiple websites.</p>
+                <div class="about-navigation">
+                    <h3><i class="fas fa-compass"></i> Quick Navigation</h3>
+                    <div class="nav-grid">
+                        <a href="#story" class="nav-item">
+                            <i class="fas fa-book-open"></i>
+                            Our Story
+                        </a>
+                        <a href="#mission" class="nav-item">
+                            <i class="fas fa-bullseye"></i>
+                            Mission & Vision
+                        </a>
+                        <a href="#values" class="nav-item">
+                            <i class="fas fa-heart"></i>
+                            Our Values
+                        </a>
+                        <a href="#contact" class="nav-item">
+                            <i class="fas fa-envelope"></i>
+                            Contact Us
+                        </a>
+                    </div>
                 </div>
 
-                <div class="about-us-section">
-                    <h2>Our Mission & Vision</h2>
-                    <div class="mission-vision-container">
-                        <div class="mission-box">
-                            <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
-                            <p>To simplify the shopping experience by providing consumers with transparent, comprehensive price comparisons and product information, enabling them to make confident, informed purchasing decisions.</p>
+                <div id="story" class="about-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-book-open"></i> Our Story</h2>
+                    </div>
+                    <div class="section-content">
+                        <p>Our story started this year with a clear vision: to create a comprehensive platform that compares different products from different retailers, showing price comparisons from different stores along with detailed specifications.</p>
+                        
+                        <div class="info-box">
+                            <p><strong>Our Journey:</strong> From concept to reality, we've built a platform that puts consumers first, making price comparison simple and transparent.</p>
                         </div>
-                        <div class="vision-box">
-                            <h3><i class="fas fa-eye"></i> Our Vision</h3>
-                            <p>To become the most trusted and comprehensive price comparison platform in South Africa, known for our accuracy, transparency, and commitment to consumer empowerment.</p>
+
+                        <p>Our main goal was to provide users with essential features including wishlist functionality and drop price alerts, making it easier for consumers to track their favorite products and get notified when prices drop.</p>
+                        
+                        <p>We believe that shopping for technology should be straightforward and transparent. By aggregating prices from trusted retailers across South Africa, we empower you to find the best deals without the hassle of visiting multiple websites.</p>
+
+                        <div class="highlight-box">
+                            <p><strong>Why Choose CompareHub?</strong> We're committed to saving you time and money by bringing all the best deals to one convenient location.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="about-us-section">
-                    <h2>Our Values</h2>
-                    <div class="values-grid">
-                        <div class="value-card">
-                            <div class="value-card-icon">
-                                <i class="fas fa-check-circle"></i>
+                <div id="mission" class="about-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-bullseye"></i> Our Mission & Vision</h2>
+                    </div>
+                    <div class="section-content">
+                        <div class="mission-vision-container">
+                            <div class="mission-box">
+                                <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                                <p>To simplify the shopping experience by providing consumers with transparent, comprehensive price comparisons and product information, enabling them to make confident, informed purchasing decisions.</p>
                             </div>
-                            <div class="value-card-title">Transparency</div>
-                            <div class="value-card-description">We believe in complete transparency in all our operations, from how we collect data to how we present information to our users.</div>
-                        </div>
-                        <div class="value-card">
-                            <div class="value-card-icon">
-                                <i class="fas fa-balance-scale"></i>
+                            <div class="vision-box">
+                                <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                                <p>To become the most trusted and comprehensive price comparison platform in South Africa, known for our accuracy, transparency, and commitment to consumer empowerment.</p>
                             </div>
-                            <div class="value-card-title">Accuracy</div>
-                            <div class="value-card-description">We are committed to providing the most accurate and up-to-date information possible, ensuring our users can trust the data they see.</div>
-                        </div>
-                        <div class="value-card">
-                            <div class="value-card-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <div class="value-card-title">User-Centric</div>
-                            <div class="value-card-description">Everything we do is focused on creating the best possible experience for our users, making comparison shopping simple and effective.</div>
-                        </div>
-                        <div class="value-card">
-                            <div class="value-card-icon">
-                                <i class="fas fa-lightbulb"></i>
-                            </div>
-                            <div class="value-card-title">Innovation</div>
-                            <div class="value-card-description">We continuously strive to improve our platform with new features and technologies that enhance the user experience.</div>
                         </div>
                     </div>
                 </div>
 
-
-                <div class="about-us-section">
-                    <h2>Contact Us</h2>
-                    <p>Have questions, feedback, or suggestions? We'd love to hear from you!</p>
-                    <div class="contact-info">
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
+                <div id="values" class="about-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-heart"></i> Our Values</h2>
+                    </div>
+                    <div class="section-content">
+                        <p>Our core values guide everything we do and shape how we serve our customers every day.</p>
+                        
+                        <div class="values-grid">
+                            <div class="value-card">
+                                <div class="value-card-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="value-card-title">Transparency</div>
+                                <div class="value-card-description">We believe in complete transparency in all our operations, from how we collect data to how we present information to our users.</div>
                             </div>
-                            <div class="contact-title">Email Us</div>
-                            <div class="contact-details">
-                                <a href="">comong soon</a>
+                            <div class="value-card">
+                                <div class="value-card-icon">
+                                    <i class="fas fa-balance-scale"></i>
+                                </div>
+                                <div class="value-card-title">Accuracy</div>
+                                <div class="value-card-description">We are committed to providing the most accurate and up-to-date information possible, ensuring our users can trust the data they see.</div>
+                            </div>
+                            <div class="value-card">
+                                <div class="value-card-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="value-card-title">User-Centric</div>
+                                <div class="value-card-description">Everything we do is focused on creating the best possible experience for our users, making comparison shopping simple and effective.</div>
+                            </div>
+                            <div class="value-card">
+                                <div class="value-card-icon">
+                                    <i class="fas fa-lightbulb"></i>
+                                </div>
+                                <div class="value-card-title">Innovation</div>
+                                <div class="value-card-description">We continuously strive to improve our platform with new features and technologies that enhance the user experience.</div>
                             </div>
                         </div>
-                        <div class="contact-card">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone-alt"></i>
+                    </div>
+                </div>
+
+                <div id="contact" class="about-section">
+                    <div class="section-header">
+                        <h2><i class="fas fa-envelope"></i> Contact Information</h2>
+                    </div>
+                    <div class="section-content">
+                        <p>Have questions, feedback, or suggestions? We'd love to hear from you and are here to help with any inquiries you may have.</p>
+                        
+                        <div class="contact-section">
+                            <h2>Get in Touch</h2>
+                            <p>We're here to help with any questions or concerns you may have.</p>
+                            
+                            <div class="contact-grid">
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <h4>Email Support</h4>
+                                    <p>Coming Soon</p>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <h4>Phone Support</h4>
+                                    <p>Coming Soon</p>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <h4>Address</h4>
+                                    <p>Coming Soon</p>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-clock"></i>
+                                    <h4>Business Hours</h4>
+                                    <p>Coming Soon</p>
+                                </div>
                             </div>
-                            <div class="contact-title">Call Us</div>
-                            <div class="contact-details">
-                                <a href="">coming soon</a>
-                            </div>
+                        </div>
+
+                        <div class="info-box">
+                            <p><strong>Response Time:</strong> We strive to respond to all inquiries within 24-48 hours during business days.</p>
                         </div>
                     </div>
                 </div>
@@ -1051,12 +1383,17 @@
         </main>
     </div>
 
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
     
- 
+    <!-- Notification Container -->
     <div class="notification-container" id="notificationContainer"></div>
     
-
+    <!-- Wishlist Modal -->
     <div id="wishlist-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1068,7 +1405,7 @@
             </div>
             <div class="modal-body">
                 <div id="wishlist-items" class="wishlist-grid">
-                 
+                    <!-- Wishlist items will be populated here -->
                 </div>
                 <div id="modal-empty-wishlist" class="empty-wishlist" style="display: none;">
                     <i class="far fa-heart"></i>
@@ -1080,7 +1417,7 @@
         </div>
     </div>
 
-  
+    <!-- Mobile Search Modal -->
     <div class="mobile-search-modal" id="mobileSearchModal">
         <div class="mobile-search-modal-header">
             <span class="mobile-search-close" id="mobileSearchClose">&times;</span>
@@ -1146,11 +1483,45 @@
 
         window.addEventListener('load', adjustContentPadding);
         window.addEventListener('resize', adjustContentPadding);
-    </script>
 
+        // Back to top functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        // Show/hide back to top button based on scroll position
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('visible');
+            } else {
+                backToTopButton.classList.remove('visible');
+            }
+        });
+        
+        // Smooth scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+<!-- Mobile Search Modal Script -->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-          
+          // Mobile search modal functionality
           const searchInput = document.getElementById('searchInput');
           const searchButton = document.querySelector('.search-button');
           const mobileSearchModal = document.getElementById('mobileSearchModal');
@@ -1160,7 +1531,7 @@
           const mobileSearchQuery = document.getElementById('mobileSearchQuery');
           const mobileSuggestionsGrid = document.getElementById('mobileSuggestionsGrid');
           
-        
+          // Function to check if device is a mobile phone (not tablet)
           function isMobilePhone() {
               return window.innerWidth <= 768 &&
                     (typeof window.orientation !== 'undefined' ||
@@ -1168,27 +1539,27 @@
                      /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
           }
           
-         
+          // Function to open mobile search modal
           function openMobileSearchModal() {
               if (isMobilePhone()) {
                   mobileSearchModal.classList.add('active');
                   mobileSearchInput.focus();
-             
+                  // Copy value from main search input if it exists
                   if (searchInput && searchInput.value) {
                       mobileSearchInput.value = searchInput.value;
-                
+                      // Trigger input event to show suggestions
                       const inputEvent = new Event('input', { bubbles: true });
                       mobileSearchInput.dispatchEvent(inputEvent);
                   }
               }
           }
           
-         
+          // Function to close mobile search modal
           function closeMobileSearchModal() {
               mobileSearchModal.classList.remove('active');
           }
           
-         
+          // Event listeners for opening modal
           if (searchInput) {
               searchInput.addEventListener('click', function(e) {
                   if (isMobilePhone()) {
@@ -1209,12 +1580,12 @@
               }, { capture: true });
           }
           
-         
+          // Event listener for closing modal
           if (mobileSearchClose) {
               mobileSearchClose.addEventListener('click', closeMobileSearchModal);
           }
           
-          
+          // Handle mobile search form submission
           if (mobileSearchForm) {
               mobileSearchForm.addEventListener('submit', function(e) {
                   e.preventDefault();
@@ -1225,7 +1596,7 @@
               });
           }
           
-          
+          // Mobile search suggestions functionality
           if (mobileSearchInput) {
               const API_URL = 'https://xf9zlapr5e.execute-api.af-south-1.amazonaws.com/search';
               let debounceTimer;
@@ -1287,21 +1658,21 @@
                           console.error('Error fetching suggestions:', error);
                           mobileSuggestionsGrid.innerHTML = '<div class="mobile-no-suggestions">Error loading suggestions</div>';
                       }
-                  }, 300); 
+                  }, 300); // Debounce delay
               });
           }
       });
     </script>
 
-  
+    <!-- Sidebar functionality -->
     <script src="sidebar.js"></script>
     
-  
+    <!-- Search suggestions functionality -->
     <script src="search-suggestions.js"></script>
     
-  
+    <!-- Wishlist modal functionality -->
     <script src="wishlistmodal.js"></script>
-    
+    <!-- Login Modal -->
     <div class="login-modal" id="loginModal">
         <div class="login-modal-container">
             <div class="login-modal-header">
@@ -1346,7 +1717,7 @@
         </div>
     </div>
 
-
+    <!-- Register Modal -->
     <div class="register-modal" id="registerModal">
         <div class="register-modal-container">
             <div class="register-modal-header">
@@ -1456,7 +1827,7 @@
         </div>
     </div>
 
-    
+    <!-- Forgot Password Modal -->
     <div id="forgotPasswordModal" class="forgot-password-modal">
         <div class="forgot-password-modal-container">
             <div class="forgot-password-modal-header">
@@ -1489,8 +1860,151 @@
                         <span id="forgotPasswordBtnText">Send Reset Code</span>
                         <div id="forgotPasswordSpinner" class="forgot-password-modal-spinner" style="display: none;"></div>
                     </button>
-
+<!-- Account authentication functionality -->
     <script src="account-authentication.js"></script>
+<!-- Cookie Banner JavaScript -->
+    <script>
+        // Cookie Banner Functions
+        function acceptCookies() {
+            localStorage.setItem('cookiesAccepted', 'true');
+            document.getElementById('cookieBanner').style.display = 'none';
+        }
+
+        function declineCookies() {
+            localStorage.setItem('cookiesAccepted', 'false');
+            document.getElementById('cookieBanner').style.display = 'none';
+        }
+
+        function showCookieBanner() {
+            const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+            if (cookiesAccepted === null) {
+                setTimeout(() => {
+                    document.getElementById('cookieBanner').style.display = 'block';
+                }, 1000);
+            }
+        }
+
+        // Newsletter subscription function
+        function subscribeNewsletter() {
+            const email = document.getElementById('newsletter-email').value;
+            if (email) {
+                alert('Thank you for subscribing to our newsletter!');
+                document.getElementById('newsletter-email').value = '';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        }
+
+        // Show cookie banner on page load
+        document.addEventListener('DOMContentLoaded', showCookieBanner);
+
+        // =========================================================================
+        // NOTIFICATION SYSTEM
+        // =========================================================================
+        function showNotification(message, type = 'success', title = '') {
+            const container = document.getElementById('notificationContainer');
+            if (!container) {
+                console.error('Notification container not found');
+                return;
+            }
+
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            // Set default titles based on type
+            const defaultTitles = {
+                success: 'Success',
+                error: 'Error',
+                warning: 'Warning',
+                info: 'Information'
+            };
+            
+            const notificationTitle = title || defaultTitles[type] || 'Notification';
+            
+            // Set icons based on type
+            const icons = {
+                success: 'fas fa-check-circle',
+                error: 'fas fa-exclamation-circle',
+                warning: 'fas fa-exclamation-triangle',
+                info: 'fas fa-info-circle'
+            };
+            
+            const icon = icons[type] || 'fas fa-bell';
+            
+            notification.innerHTML = `
+                <div class="notification-header">
+                    <div class="notification-title">
+                        <i class="${icon}"></i>
+                        ${notificationTitle}
+                    </div>
+                    <button class="notification-close" onclick="closeNotification(this)">&times;</button>
+                </div>
+                <div class="notification-message">${message}</div>
+                <div class="notification-progress">
+                    <div class="notification-progress-bar"></div>
+                </div>
+            `;
+            
+            container.appendChild(notification);
+            
+            // Trigger animation
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Auto remove after 5 seconds
+            const duration = 5000;
+            const progressBar = notification.querySelector('.notification-progress-bar');
+            if (progressBar) {
+                progressBar.style.transitionDuration = `${duration}ms`;
+                setTimeout(() => {
+                    progressBar.style.transform = 'translateX(0)';
+                }, 100);
+            }
+            
+            setTimeout(() => {
+                closeNotification(notification.querySelector('.notification-close'));
+            }, duration);
+        }
+
+        function closeNotification(closeButton) {
+            const notification = closeButton.closest('.notification');
+            if (notification) {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 400);
+            }
+        }
+
+        // =========================================================================
+        // SESSION EXPIRATION HANDLING
+        // =========================================================================
+        function handleLogout() {
+            sessionStorage.clear();
+            window.location.href = 'index.html';
+        }
+
+        // Check for session expiration on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Example session check - you can integrate this with your actual session management
+            const accessToken = sessionStorage.getItem('accessToken');
+            if (accessToken) {
+                // Simulate session expiration check
+                try {
+                    // This would be replaced with actual API call to validate session
+                    // For now, we'll just set up the infrastructure
+                    console.log('Session validation would happen here');
+                } catch (error) {
+                    showNotification(error.message, 'error', 'Session Expired');
+                    setTimeout(handleLogout, 2000);
+                }
+            }
+        });
+    </script>
                 </form>
                 
                 <div class="forgot-password-modal-back-link">
@@ -1500,6 +2014,20 @@
         </div>
     </div>
     </div>
-
-</body>
-</html>
+    
+        <!-- Cookie Banner -->
+        <div class="cookie-banner" id="cookieBanner">
+            <div class="cookie-banner-content">
+                <div class="cookie-banner-text">
+                    <i class="fas fa-cookie-bite"></i>
+                    <span>This website uses cookies to provide you with the best experience. By continuing to use this site, you agree to our use of cookies.</span>
+                </div>
+                <div class="cookie-banner-actions">
+                    <button class="cookie-banner-btn accept-btn" onclick="acceptCookies()">Accept</button>
+                    <button class="cookie-banner-btn decline-btn" onclick="declineCookies()">Decline</button>
+                </div>
+            </div>
+        </div>
+    
+    </body>
+    </html>
