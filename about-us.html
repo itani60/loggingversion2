@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - CompareHub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="inde.css">
     <link rel="stylesheet" href="wishlistmodal-mobile.css">
     <style>
         /* Main container styling */
@@ -1063,7 +1063,11 @@
 <body>
     <header class="header">
         <div class="header-top">
-            <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+            <button class="sidebar-toggle" onclick="toggleSidebar()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="logo">
                 <a href="index.html" class="logo-link">
                     <img src="https://comparehub-smartphone-images.s3.af-south-1.amazonaws.com/IMG_20250625_174144.jpg" alt="CompareHubPrices" class="logo-image">
@@ -1071,8 +1075,17 @@
             </div>
             <div class="search-container">
                 <form id="search-form">
-                    <input type="text" name="q" class="search-input" placeholder="Search......." id="searchInput">
-                    <button type="submit" class="search-button" aria-label="Search"><i class="fas fa-search"></i></button>
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" name="q" class="search-input" placeholder="Search for products, brands, deals..." id="searchInput">
+                        <button type="button" class="search-clear" id="searchClear" style="display: none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <button type="submit" class="search-button" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                        <span class="search-text">Search</span>
+                    </button>
                 </form>
                 <div class="search-suggestions" id="searchSuggestions">
                     <div class="suggestions-header">
@@ -1081,6 +1094,15 @@
                     </div>
                     <div class="suggestions-grid" id="suggestionsGrid"></div>
                 </div>
+            </div>
+            <div class="header-actions">
+                <button class="header-action-btn" id="notifications-btn" aria-label="Notifications">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationBadge">3</span>
+                </button>
+                <button class="header-action-btn" id="account-btn" aria-label="Account">
+                    <i class="fas fa-user"></i>
+                </button>
             </div>
         </div>
         <nav class="category-nav">
@@ -1445,10 +1467,10 @@
             </div>
             <div class="footer-section">
                 <h3>Help & Support</h3>
-                 <ul>
-                    <li><a href="contact-us.html">Contact Us</a></li>
-                    <li><a href="FAQs.html">FAQs</a></li>
-                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <ul>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#faq">FAQs</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
                     <li><a href="Terms-of-Service.html">Terms of Service</a></li>
                 </ul>
             </div>
